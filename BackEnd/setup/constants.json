@@ -1,0 +1,21 @@
+{
+    "PORT": 8000,
+    "DATABASE": {
+        "URI": "mongodb+srv://asd:asd@cluster0.s7tgpof.mongodb.net/?retryWrites=true&w=majority"
+    },
+    "SECRET": "Hello Google",
+    "SALT_ROUNDS": 10,
+    "STATUS_CODE": {
+        "OK": 200,
+        "BAD_REQUEST": 400,
+        "UNAUTHORISED": 401,
+        "FORBIDDEN": 403,
+        "NOT_FOUND": 404,
+        "INTERNAL_SERVER": 500
+    },
+    "BAD_REQUEST": "BAD_REQUEST",
+    "UNAUTHORISED": "UNAUTHORISED_ERROR",
+    "FORBIDDEN": "FORBIDDEN_ERROR",
+    "INTERNAL_SERVER": "INTERNAL_SERVER_ERROR",
+    "NOT_FOUND": "NOT_FOUND_ERROR"
+}
