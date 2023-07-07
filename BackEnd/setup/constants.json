@@ -3,6 +3,10 @@
     "DATABASE": {
         "URI": "mongodb+srv://asd:asd@cluster0.s7tgpof.mongodb.net/?retryWrites=true&w=majority"
     },
+    "MAIL": {
+        "email": "takeawaymenusystem@outlook.com",
+        "password": "Takeaway@menusystem"
+    },
     "SECRET": "Hello Google",
     "SALT_ROUNDS": 10,
     "STATUS_CODE": {

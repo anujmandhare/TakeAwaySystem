@@ -2,9 +2,10 @@ var express = require('express');
 const cors = require('cors');
 
 const { PORT } = require('./setup/constants.json');
-const errorHandler = require('./setup/errorHandler');
+const errorHandler = require('./otherFiles/errorHandler');
 const database = require('./setup/mongoConnection');
 const user = require('./controller/user');
+const { userVerification } = require('./otherFiles/emailVerification');
 
 var app = express();
 
@@ -15,6 +16,7 @@ app.use(cors());
 
 app.post('/login', user.login);
 app.post('/register', user.register);
+app.get('/verify/*', userVerification);
 
 app.use(errorHandler);
 

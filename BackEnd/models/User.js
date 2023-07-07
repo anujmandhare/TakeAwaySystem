@@ -4,7 +4,8 @@ const Schema = mongoose.Schema
 const User = new Schema(
     {
         username: { type: String, required: true },
-        password: { type: String, required: true }
+        password: { type: String, required: true },
+        verified: { type: Boolean, required: true, default: false }
     },
     { timestamps: true },
 )

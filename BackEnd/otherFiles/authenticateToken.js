@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 
-const CONSTANTS = require('./constants.json');
+const CONSTANTS = require('../setup/constants.json');
 
 
 const createToken = (username) => {

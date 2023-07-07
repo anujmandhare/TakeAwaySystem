@@ -1,4 +1,4 @@
-const { STATUS_CODE, BAD_REQUEST, UNAUTHORISED, FORBIDDEN } = require('./constants.json');
+const { STATUS_CODE, BAD_REQUEST, UNAUTHORISED, FORBIDDEN } = require('../setup/constants.json');
 
 
 const errorHandler = (error, req, res, next) => {

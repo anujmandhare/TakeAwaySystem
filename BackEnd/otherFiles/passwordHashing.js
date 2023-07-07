@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 
 
-const CONSTANTS = require('./constants.json');
+const CONSTANTS = require('../setup/constants.json');
 
 
 const hashedPassword = async (password) => {

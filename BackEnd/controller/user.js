@@ -1,7 +1,8 @@
 const User = require('../models/User');
-const CONSTANTS = require('../setup/constants.json')
-const { hashedPassword, hashCompare } = require('../setup/passwordHashing');
-const { authenticateJWT, createToken } = require('../setup/authenticateToken');
+const CONSTANTS = require('../setup/constants.json');
+const { hashedPassword, hashCompare } = require('../otherFiles/passwordHashing');
+const { authenticateJWT, createToken } = require('../otherFiles/authenticateToken');
+const { userVerification, sendVerificationMail } = require('../otherFiles/emailVerification');
 
 
 const login = async (req, res, next) => {
@@ -10,6 +11,10 @@ const login = async (req, res, next) => {
         const { username, password } = new User(req.body);
 
         const data = await User.findOne({ username });
+
+        if (!data.verified) {
+            throw Error(CONSTANTS.BAD_REQUEST, { cause: 'Please verify your email first!' });
+        }
 
         const passwordCheck = await hashCompare(password, data.password);
 
@@ -34,10 +39,11 @@ const register = async (req, res, next) => {
         if (!idAvailable) {
             payload.password = await hashedPassword(payload.password);
 
+            await sendVerificationMail(payload.username);
             const data = await payload.save()
-            const jwtToken = createToken(data.username);
+            res.send(`User ${'name'} registered with id ${payload.username}!!! \nPlease verify your email by clicking on the link received in your email.`);
 
-            res.status(CONSTANTS.STATUS_CODE.OK).send({ username: data.username, jwtToken });
+            // res.status(CONSTANTS.STATUS_CODE.OK).send({ username: payload.username });
         } else {
             throw Error(CONSTANTS.BAD_REQUEST, { cause: 'User already registered' });
         }
