@@ -4,23 +4,28 @@ const User = require('../models/User');
 
 const sendVerificationMail = async (email) => {
 
-    const transporter = nodemailer.createTransport({
-        service: 'Outlook',
-        auth: {
-            user: CONSTANTS.MAIL.email,
-            pass: CONSTANTS.MAIL.password
-        }
-    });
+    try {
+        const transporter = nodemailer.createTransport({
+            service: 'Outlook',
+            auth: {
+                user: CONSTANTS.MAIL.email,
+                pass: CONSTANTS.MAIL.password
+            }
+        });
 
-    const verificationLink = `http://localhost:8000/verify/?username=${email}`;
-    const mailOptions = {
-        from: 'takeawaymenusystem@outlook.com',
-        to: email,
-        subject: 'Verify your email address',
-        text: `Please click on the following link to verify your email address: ${verificationLink}`
-    };
+        const verificationLink = `http://localhost:8000/verify/?username=${email}`;
+        const mailOptions = {
+            from: 'takeawaymenusystem@outlook.com',
+            to: email,
+            subject: 'Verify your email address',
+            text: `Please click on the following link to verify your email address: ${verificationLink}`
+        };
 
-    return await transporter.sendMail(mailOptions);
+        return await transporter.sendMail(mailOptions);
+    } catch (error) {
+        throw Error('Failed to send email for verification.', { cause: error });
+    }
+
 }
 
 
@@ -34,7 +39,7 @@ const userVerification = async (req, res, next) => {
         if (data.modifiedCount) {
             res.status(200).send(`User with email id ${username} is successfully verified!!!`);
         } else {
-            throw Error(BAD_REQUEST, { cause: 'User not found please provide valid username.' });
+            throw Error(CONSTANTS.BAD_REQUEST, { cause: 'User not found please provide valid username.' });
         }
 
     } catch (error) {

@@ -15,7 +15,7 @@ const App = () => {
     <Provider store={store}>
       <PrimeReactProvider>
 
-        <Router></Router>
+        <Router />
 
       </PrimeReactProvider>
     </Provider>

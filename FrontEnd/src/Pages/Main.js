@@ -8,7 +8,6 @@ import { deleteUser } from "../Redux/User";
 export default function Main() {
 
     const user = useSelector(_ => _.user);
-    console.log(user);
     const dispatch = useDispatch();
 
 

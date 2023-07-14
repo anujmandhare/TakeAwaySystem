@@ -9,11 +9,11 @@ import Register from './Register';
 import Main from './Main';
 
 export default function MainRouter() {
-    // const user = useSelector(state => state.user);
+    const user = useSelector(state => state.user);
 
     return <Router>
         {/* <CustomNavBar /> */}
-        {false ?
+        {user.loading ?
             <div className='d-flex justify-content-center align-items-center'>
                 <ProgressSpinner style={{ width: '50px', height: '50px' }} strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s" />
             </div> : <>

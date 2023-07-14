@@ -9,13 +9,11 @@ import CONSTANTS from "../Setup/Constants.json";
 import TextField from "../Components/InputField";
 import LinkButton from "../Components/LinkButton";
 import CustomButton from "../Components/CustomButton";
-import CustomRadioButton from "../Components/CustomRadioButton";
 
 
 export default function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState();
 
     const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -31,7 +29,7 @@ export default function Login() {
         }
 
         dispatch(setLoadingTrue());
-        const data = await POST(CONSTANTS.LOGIN, { username, password: password, role: 'customer' });
+        const data = await POST(CONSTANTS.LOGIN, { username, password });
 
         if (data && data.username) {
             dispatch(setUser({ ...data }));
@@ -47,7 +45,6 @@ export default function Login() {
         <>
             <TextField id='username' label='Username' value={username} setter={setUsername} />
             <TextField id='password' type="password" label='Password' value={password} setter={setPassword} />
-            {/* <CustomRadioButton label='Customer' value={role} setter={setRole} /> */}
 
             <CustomButton label='Login' onClick={handleSubmit} />
             <LinkButton label="Register" link='register' />

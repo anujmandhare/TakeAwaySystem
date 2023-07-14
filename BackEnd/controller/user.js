@@ -39,7 +39,11 @@ const register = async (req, res, next) => {
         if (!idAvailable) {
             payload.password = await hashedPassword(payload.password);
 
-            await sendVerificationMail(payload.username);
+            //Uncomment below line for skipping email verification
+            payload.verified = true;
+
+            // await sendVerificationMail(payload.username);
+
             const data = await payload.save()
             res.send(`User ${'name'} registered with id ${payload.username}!!! \nPlease verify your email by clicking on the link received in your email.`);
 
