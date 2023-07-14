@@ -6,3 +6,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.marginTop10p {
+  margin-top: 10%;
+}
+
+.card {
+  margin-top: 20px;
+  padding-top: 10px;
+  margin-bottom: 10px;
+}

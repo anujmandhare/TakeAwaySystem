@@ -43,11 +43,15 @@ export default function Login() {
 
     return (
         <>
-            <TextField id='username' label='Username' value={username} setter={setUsername} />
-            <TextField id='password' type="password" label='Password' value={password} setter={setPassword} />
+            <div className="flex align-items-center justify-content-center marginTop10p">
+                <div className="">
+                    <TextField id='username' label='Username' value={username} setter={setUsername} />
+                    <TextField id='password' type="password" label='Password' value={password} setter={setPassword} />
 
-            <CustomButton label='Login' onClick={handleSubmit} />
-            <LinkButton label="Register" link='register' />
+                    <CustomButton label='Login' onClick={handleSubmit} />
+                    <LinkButton label="Register" link='register' />
+                </div>
+            </div>
         </>
     );
 }
