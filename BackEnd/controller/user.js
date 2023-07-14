@@ -1,8 +1,8 @@
 const User = require('../models/User');
 const CONSTANTS = require('../setup/constants.json');
 const { hashedPassword, hashCompare } = require('../otherFiles/passwordHashing');
-const { authenticateJWT, createToken } = require('../otherFiles/authenticateToken');
-const { userVerification, sendVerificationMail } = require('../otherFiles/emailVerification');
+const { createToken } = require('../otherFiles/authenticateToken');
+const { sendVerificationMail } = require('../otherFiles/emailVerification');
 
 
 const login = async (req, res, next) => {
@@ -19,8 +19,8 @@ const login = async (req, res, next) => {
         const passwordCheck = await hashCompare(password, data.password);
 
         if (data && passwordCheck) {
-            const jwtToken = createToken(username);
-            return res.status(CONSTANTS.STATUS_CODE.OK).send({ jwtToken, username });
+            const token = createToken({ username, role: data.role });
+            return res.status(CONSTANTS.STATUS_CODE.OK).send({ token, username, role: data.role });
         } else {
             throw Error(CONSTANTS.UNAUTHORISED, { cause: 'Incorrect email or Password!' });
         }

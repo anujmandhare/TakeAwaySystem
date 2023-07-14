@@ -1,6 +1,6 @@
-import { axios as AXIOS } from 'axios';
+import axios from 'axios';
 
-import CONSTANTS from './Constants';
+import CONSTANTS from '../Setup/Constants.json';
 const { URL } = CONSTANTS;
 
 const handleError = (error) => {
@@ -15,28 +15,28 @@ const handleError = (error) => {
 
 async function GET(path, payload) {
 
-    return AXIOS.get(URL.concat(path), payload)
+    return axios.get(URL.concat(path), payload)
         .then(response => response.data)
         .catch(handleError);
 }
 
 async function POST(path, payload) {
 
-    return AXIOS.post(URL.concat(path), payload)
+    return axios.post(URL.concat(path), payload)
         .then(response => response.data)
         .catch(handleError);
 }
 
 async function PUT(path, payload) {
 
-    return AXIOS.put(URL.concat(path), payload)
+    return axios.put(URL.concat(path), payload)
         .then(response => response.data)
         .catch(handleError);
 }
 
 async function DELETE(path, payload) {
 
-    return AXIOS.delete(URL.concat(path), payload)
+    return axios.delete(URL.concat(path), payload)
         .then(response => response.data)
         .catch(handleError);
 }

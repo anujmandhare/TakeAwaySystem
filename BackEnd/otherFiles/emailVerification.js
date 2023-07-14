@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const CONSTANTS = require('../setup/constants.json');
-
+const User = require('../models/User');
 
 const sendVerificationMail = async (email) => {
 

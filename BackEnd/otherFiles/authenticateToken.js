@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken');
 const CONSTANTS = require('../setup/constants.json');
 
 
-const createToken = (username) => {
-    const accessToken = jwt.sign({ username }, CONSTANTS.SECRET);
+const createToken = ({ username, role }) => {
+    const accessToken = jwt.sign({ username, role }, CONSTANTS.SECRET);
     return accessToken;
 }
 
