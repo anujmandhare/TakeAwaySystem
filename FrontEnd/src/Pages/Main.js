@@ -1,25 +1,22 @@
 import { Navigate } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import CustomButton from "../Components/CustomButton";
-import { deleteUser } from "../Redux/User";
+import TabMenu from '../Components/TabMenu';
+import { useState } from "react";
 
 
 export default function Main() {
 
     const user = useSelector(_ => _.user);
-    const dispatch = useDispatch();
 
+    const [tab, setTab] = useState(0);
 
     if (!user?.username) {
         return <Navigate to="/login" replace={true} />;
     }
 
-    const handleLogout = () => {
-        dispatch(deleteUser());
-    }
+    return (<>
+        <TabMenu tab={tab} setTab={setTab} />
 
-    return (<>Home
-        <CustomButton onClick={handleLogout} label='logout' id='logout' />
     </>);
 }
