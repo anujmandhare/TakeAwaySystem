@@ -17,6 +17,7 @@ app.use(cors());
 app.post('/login', user.login);
 app.post('/register', user.register);
 app.get('/verify/*', userVerification);
+app.post('/update', user.update);
 
 app.use(errorHandler);
 

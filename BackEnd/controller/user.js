@@ -20,7 +20,7 @@ const login = async (req, res, next) => {
 
         if (data && passwordCheck) {
             const token = createToken({ username, role: data.role });
-            return res.status(CONSTANTS.STATUS_CODE.OK).send({ token, username, role: data.role });
+            return res.status(CONSTANTS.STATUS_CODE.OK).send({ token, username, role: data.role, name: data.name, number: data.number });
         } else {
             throw Error(CONSTANTS.UNAUTHORISED, { cause: 'Incorrect email or Password!' });
         }
@@ -44,7 +44,7 @@ const register = async (req, res, next) => {
 
             // await sendVerificationMail(payload.username);
 
-            const data = await payload.save()
+            await payload.save()
             res.send(`User ${'name'} registered with id ${payload.username}!!! \nPlease verify your email by clicking on the link received in your email.`);
 
             // res.status(CONSTANTS.STATUS_CODE.OK).send({ username: payload.username });
@@ -56,7 +56,25 @@ const register = async (req, res, next) => {
     }
 }
 
+const update = async (req, res, next) => {
+    try {
+
+        const { name, username, number } = new User(req.body);
+        const data = await User.updateOne({ username }, { name, number });
+
+        if (data.modifiedCount) {
+            res.status(CONSTANTS.STATUS_CODE.OK).send('Profile Updated Successfully!');
+        } else {
+            throw Error(CONSTANTS.BAD_REQUEST, { cause: 'Nothing to update.' });
+        }
+
+    } catch (error) {
+
+        next(error);
+    }
+};
+
 
 module.exports = {
-    login, register
+    login, register, update
 }; 

@@ -9,10 +9,10 @@ export const user = createSlice({
         setUser: (state, action) => {
             state.username = action.payload.username;
             state.name = action.payload.name;
-            state.role = action.payload.role;
-            state.token = action.payload.token;
             state.number = action.payload.number;
+            state.role = action.payload.role;
             state.loading = false;
+            state = { ...state, ...action.payload };
             localStorage.setItem('user', JSON.stringify(state));
         },
         deleteUser: (state) => {
