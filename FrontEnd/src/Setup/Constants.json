@@ -2,5 +2,9 @@
     "LOGIN": "/login",
     "REGISTER": "/register",
     "UPDATE": "/update",
+    "EMAIL": "EMAIL",
+    "NUMBER": "NUMBER",
+    "EMAIL_ERROR": "Please enter a valid Email Id",
+    "NUMBER_ERROR": "Please enter a valid Mobile Number",
     "URL": "http://localhost:8000"
 }

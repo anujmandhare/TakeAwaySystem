@@ -10,6 +10,7 @@ import CONSTANTS from "../Setup/Constants.json";
 import CustomButton from '../Components/CustomButton';
 import CustomRadioButton from "../Components/CustomRadioButton";
 import LinkButton from "../Components/LinkButton";
+import validator from "../Setup/Validation";
 
 export default function Register() {
     const [name, setName] = useState('');
@@ -18,7 +19,6 @@ export default function Register() {
     const [role, setRole] = useState('Customer');
     const [number, setNumber] = useState('');
 
-    const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const user = useSelector(_ => _.user);
 
@@ -29,8 +29,7 @@ export default function Register() {
     }
 
     const handleSubmit = async (e) => {
-        if (!emailPattern.test(username)) {
-            alert("Please enter valid email address");
+        if (!(validator({ type: CONSTANTS.EMAIL, stringToTest: username }) && validator({ type: CONSTANTS.NUMBER, stringToTest: number }))) {
             return;
         }
 

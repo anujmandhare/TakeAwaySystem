@@ -6,6 +6,7 @@ import { setLoadingTrue, setLoadingFalse, setUser } from "../Redux/User";
 import CONSTANTS from "../Setup/Constants.json";
 import CustomerTextField from '../Components/InputField';
 import CustomButton from '../Components/CustomButton';
+import validator from "../Setup/Validation";
 
 export default function Profile() {
 
@@ -28,6 +29,10 @@ export default function Profile() {
 
 
     const handleUpdate = async () => {
+
+        if (!validator({ type: CONSTANTS.NUMBER, stringToTest: number })) {
+            return;
+        }
 
         dispatch(setLoadingTrue());
         const data = await POST(CONSTANTS.UPDATE, { name, username, role, number });

@@ -9,13 +9,12 @@ import CONSTANTS from "../Setup/Constants.json";
 import TextField from "../Components/InputField";
 import LinkButton from "../Components/LinkButton";
 import CustomButton from "../Components/CustomButton";
+import validator from "../Setup/Validation";
 
 
 export default function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
-    const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 
     const user = useSelector(_ => _.user);
@@ -23,8 +22,7 @@ export default function Login() {
     const dispatch = useDispatch();
 
     const handleSubmit = async (e) => {
-        if (!emailPattern.test(username)) {
-            alert("Please enter valid email address");
+        if (!validator({ type: CONSTANTS.EMAIL, stringToTest: username })) {
             return;
         }
 
