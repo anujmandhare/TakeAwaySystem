@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const User = require('../models/UserModel');
 const CONSTANTS = require('../setup/constants.json');
 const { hashedPassword, hashCompare } = require('../otherFiles/passwordHashing');
 const { createToken } = require('../otherFiles/authenticateToken');

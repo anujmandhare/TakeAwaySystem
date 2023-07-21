@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 const CONSTANTS = require('../setup/constants.json');
-const User = require('../models/User');
+const User = require('../models/UserModel');
 
 const sendVerificationMail = async (email) => {
 
@@ -13,7 +13,7 @@ const sendVerificationMail = async (email) => {
             }
         });
 
-        const verificationLink = `http://localhost:8000/verify/?username=${email}`;
+        const verificationLink = `http://localhost:8000/user/verify/?username=${email}`;
         const mailOptions = {
             from: 'takeawaymenusystem@outlook.com',
             to: email,

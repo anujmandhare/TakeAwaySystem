@@ -6,11 +6,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { POST } from "../Setup/Api";
 import { setUser, setLoadingTrue, setLoadingFalse } from "../Redux/User";
 import CONSTANTS from "../Setup/Constants.json";
-import TextField from "../Components/InputField";
+import CustomInputField from "../Components/CustomInputField";
 import LinkButton from "../Components/LinkButton";
 import CustomButton from "../Components/CustomButton";
 import validator from "../Setup/Validation";
+import { CustomerUser, StaffUser, AdminUser } from "../dummyData";
 
+const data = AdminUser;
 
 export default function Login() {
     const [username, setUsername] = useState('');
@@ -27,7 +29,7 @@ export default function Login() {
         }
 
         dispatch(setLoadingTrue());
-        const data = await POST(CONSTANTS.LOGIN, { username, password });
+        // const data = await POST(CONSTANTS.LOGIN, { username, password });
 
         if (data && data.username) {
             dispatch(setUser({ ...data }));
@@ -43,8 +45,8 @@ export default function Login() {
         <>
             <div className="flex align-items-center justify-content-center marginTop10p">
                 <div className="">
-                    <TextField id='username' label='Username' value={username} setter={setUsername} />
-                    <TextField id='password' type="password" label='Password' value={password} setter={setPassword} />
+                    <CustomInputField id='username' label='Username' value={username} setter={setUsername} />
+                    <CustomInputField id='password' type="password" label='Password' value={password} setter={setPassword} />
 
                     <CustomButton label='Login' onClick={handleSubmit} />
                     <LinkButton label="Register" link='register' />

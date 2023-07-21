@@ -1,7 +1,10 @@
 {
-    "LOGIN": "/login",
-    "REGISTER": "/register",
-    "UPDATE": "/update",
+    "LOGIN": "/user/login",
+    "REGISTER": "/user/register",
+    "UPDATE": "/user/update",
+    "GET_ALL_MENU_ITEMS": "/menu/getAllMenuItems",
+    "ADD_MENU_ITEM": "/menu/addMenuItem",
+    "UPDATE_MENU_ITEM": "/menu/updateMenuItem",
     "EMAIL": "EMAIL",
     "NUMBER": "NUMBER",
     "EMAIL_ERROR": "Please enter a valid Email Id",

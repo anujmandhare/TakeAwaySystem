@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { POST } from "../Setup/Api";
 import { setLoadingTrue, setLoadingFalse, setUser } from "../Redux/User";
 import CONSTANTS from "../Setup/Constants.json";
-import CustomerTextField from '../Components/InputField';
+import CustomInputField from '../Components/CustomInputField';
 import CustomButton from '../Components/CustomButton';
 import validator from "../Setup/Validation";
 
@@ -48,10 +48,10 @@ export default function Profile() {
 
     return (
         <div className="card">
-            <CustomerTextField id='name' label='Name' value={name} setter={setName} />
-            <CustomerTextField id='username' label='Username' disabled={true} value={username} setter={setUsername} />
-            <CustomerTextField id='number' label='Mobile Number' value={number} setter={setNumber} />
-            <CustomerTextField id='role' label='Role' disabled={true} value={role} setter={setRole} />
+            <CustomInputField id='name' label='Name' value={name} setter={setName} />
+            <CustomInputField id='username' label='Username' disabled={true} value={username} setter={setUsername} />
+            <CustomInputField id='number' label='Mobile Number' value={number} setter={setNumber} />
+            <CustomInputField id='role' label='Role' disabled={true} value={role} setter={setRole} />
 
             <CustomButton label='Update' onClick={handleUpdate} />
         </div>

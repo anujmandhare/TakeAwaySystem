@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { POST } from "../Setup/Api";
 import { setLoadingTrue, setLoadingFalse } from "../Redux/User";
-import TextField from "../Components/InputField";
+import CustomInputField from "../Components/CustomInputField";
 import CONSTANTS from "../Setup/Constants.json";
 import CustomButton from '../Components/CustomButton';
 import CustomRadioButton from "../Components/CustomRadioButton";
@@ -52,10 +52,10 @@ export default function Register() {
         <>
             <div className="flex align-items-center justify-content-center marginTop10p">
                 <div className="">
-                    <TextField id='name' label='Name' value={name} setter={setName} />
-                    <TextField id='username' label='Username' value={username} setter={setUsername} />
-                    <TextField id='password' type="password" label='Password' value={password} setter={setPassword} />
-                    <TextField id='number' label='Mobile Number' value={number} setter={setNumber} />
+                    <CustomInputField id='name' label='Name' value={name} setter={setName} />
+                    <CustomInputField id='username' label='Username' value={username} setter={setUsername} />
+                    <CustomInputField id='password' type="password" label='Password' value={password} setter={setPassword} />
+                    <CustomInputField id='number' label='Mobile Number' value={number} setter={setNumber} />
                     <CustomRadioButton labels={['Customer', 'Staff', 'Admin']} value={role} setter={setRole} />
 
                     <CustomButton label='Register' onClick={handleSubmit} />
