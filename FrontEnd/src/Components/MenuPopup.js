@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
+import { useSelector } from "react-redux";
 
 
 import { POST } from '../Setup/Api';
@@ -9,7 +10,9 @@ import CONSTANTS from '../Setup/Constants.json';
 import CustomInputField from './CustomInputField';
 import CustomTextArea from "./CustomTextArea";
 
-export default function FooterDemo({ data, close, visible, ...rest }) {
+export default function FooterDemo({ close, visible, ...rest }) {
+
+    const data = useSelector(_ => _.data);
 
     const [name, setName] = useState(data?.name ? data.name : '');
     const [price, setPrice] = useState(data?.price ? data.price : '');

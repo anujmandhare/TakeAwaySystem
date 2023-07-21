@@ -7,10 +7,13 @@ import { menuItems } from '../dummyData';
 import MenuPopup from '../Components/MenuPopup';
 import { useEffect, useState } from 'react';
 import { GET } from '../Setup/Api';
+import { removeMenuItem } from '../Redux/Data';
 
 
 export default function Menu() {
-    const user = useSelector(_ => _.user);
+    const { user, data } = useSelector(_ => _);
+    const dispatch = useDispatch();
+
     const [showVisible, setShowVisible] = useState(false);
     const [menuItemList, setMenuItemList] = useState([]);
     const [ErrorMsg, setErrorMsg] = useState('');
@@ -27,8 +30,9 @@ export default function Menu() {
 
     };
 
-    const handleAddItem = () => {
-
+    const handleOpenClose = (booleanValue) => {
+        dispatch(removeMenuItem());
+        setShowVisible(booleanValue);
     };
 
 
@@ -41,7 +45,7 @@ export default function Menu() {
             {
                 user.role === 'Admin' ?
                     <div className='flex-row'>
-                        <CustomButton id='addMenuItem' label='Add Menu Item' size="large" onClick={() => setShowVisible(true)} />
+                        <CustomButton id='addMenuItem' label='Add Menu Item' size="large" onClick={() => handleOpenClose(true)} />
                     </div>
                     :
                     <></>
@@ -50,13 +54,13 @@ export default function Menu() {
             {
                 menuItemList.length ?
                     <div className="grid" style={{ overflowX: 'auto' }}>
-                        {menuItemList.map(_ => <MenuItemCard title={_.name} price={_.price} ingredients={_.ingredients} showPopup={setShowVisible} />)}
+                        {menuItemList.map(_ => <MenuItemCard name={_.name} price={_.price} ingredients={_.ingredients} showPopup={setShowVisible} />)}
                     </div>
                     :
                     <>{ErrorMsg}</>
             }
 
-            <MenuPopup visible={showVisible} close={setShowVisible} />
+            <MenuPopup visible={showVisible} close={handleOpenClose} />
         </>
     )
 }
