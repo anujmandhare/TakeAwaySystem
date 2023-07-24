@@ -12,7 +12,7 @@ const login = async (req, res, next) => {
 
         const data = await User.findOne({ username });
 
-        if (!data.verified) {
+        if (data && !data.verified) {
             throw Error(CONSTANTS.BAD_REQUEST, { cause: 'Please verify your email first!' });
         }
 

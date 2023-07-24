@@ -16,7 +16,7 @@ export default function NavBar() {
     }
 
 
-    const start = <div style={{ fontSize: 36, fontStyle: 'italic', fontWeight: 'bold' }}>Take Away</div>;
+    const start = <div style={{ fontSize: 36, fontStyle: 'italic', fontWeight: 'bold', color: '#6366F1' }}>OnTheGo</div>;
     const end = user.username ? <CustomButton onClick={handleLogout} label='logout' id='logout' /> : <></>;
 
     return (

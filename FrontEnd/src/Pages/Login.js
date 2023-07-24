@@ -29,7 +29,7 @@ export default function Login() {
         }
 
         dispatch(setLoadingTrue());
-        // const data = await POST(CONSTANTS.LOGIN, { username, password });
+        const data = await POST(CONSTANTS.LOGIN, { username, password });
 
         if (data && data.username) {
             dispatch(setUser({ ...data }));
