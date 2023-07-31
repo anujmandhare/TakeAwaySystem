@@ -10,7 +10,7 @@ import CustomButton from '../Components/CustomButton';
 import CustomInputField from '../Components/CustomInputField';
 
 export default function OrderPreview({ name, price, ingredients, className = '', ...rest }) {
-
+    const username = useSelector(_ => _.user.username);
     const order = useSelector(_ => _.order);
     const dispatch = useDispatch();
 
@@ -18,36 +18,51 @@ export default function OrderPreview({ name, price, ingredients, className = '',
     const [note, setNote] = useState('');
 
     const handlePlaceOrder = async () => {
-        const response = await POST(CONSTANTS.PLACE_ORDER, { note, data, date: new Date(), status: 'placed' });
+        if (!data.length) {
+            alert('Please add items to place an order');
+            return;
+        }
+        const response = await POST(CONSTANTS.PLACE_ORDER, { note, data, date: new Date(), status: 'placed', username });
         dispatch(setLoadingTrue());
         if (response) {
+            dispatch(clearCart());
+            setNote('');
             alert(response);
         }
         dispatch(setLoadingFalse());
     }
 
-    const handleDataChange = (removeItem) => {
+    const handleRemoveItem = (removeItem) => {
         const nstate = data.filter(_ => _.name === removeItem.name ? false : true);
         setData(nstate);
         dispatch(removeFromOrder(nstate));
     }
 
     const handleClearCart = () => {
+        setNote('');
         setData([]);
         dispatch(clearCart());
     }
+
+    const deleteButton = (info) => <div className='flex flex-row-reverse'>
+        <CustomButton severity="danger" id={info.name} label='Remove' onClick={() => handleRemoveItem(info)} />
+    </div>
+
+    const customerPreviewColumns = [{ field: 'name', header: 'Name' },
+    { field: 'price', header: 'Price' },
+    { field: '', header: '', body: deleteButton }];
 
     useEffect(() => { setData(order) }, [order]);
 
     return (
         <div className="col-11">
-            <div className='flex' >
-                <CustomInputField id='note' label='Add Note' value={note} setter={setNote} />
+            <div className='flex'>
+                <CustomInputField id='note' label='Add Note' value={note} setter={setNote} style={{ width: '1000px' }} />
                 <CustomButton id='placeOrder' label='Place Order' onClick={handlePlaceOrder} className='marginLeft5p' />
                 <CustomButton id='clearCard' label='Clear Cart' onClick={handleClearCart} severity="danger" className='marginLeft5p' />
-            </div >
+            </div>
 
-            <CustomTable data={data} handleRemoveItem={handleDataChange} className={'button'} />
+            <CustomTable data={data} columnHeaders={customerPreviewColumns} className={'button'} />
         </div >
     )
 }

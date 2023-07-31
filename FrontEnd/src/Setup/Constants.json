@@ -5,6 +5,7 @@
     "GET_ALL_MENU_ITEMS": "/menu/getAllMenuItems",
     "ADD_MENU_ITEM": "/menu/addMenuItem",
     "UPDATE_MENU_ITEM": "/menu/updateMenuItem",
+    "GET_ALL_ORDERS": "/order/getAllOrders",
     "PLACE_ORDER": "/order/placeOrder",
     "EMAIL": "EMAIL",
     "NUMBER": "NUMBER",

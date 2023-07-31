@@ -7,6 +7,7 @@ const Order = new Schema(
         note: { type: String, required: false },
         date: { type: Date, required: true },
         status: { type: String, required: true, enum: ['placed', 'preparing', 'prepared', 'delivered', 'declined'] },
+        username: { type: String, required: true }
     }
 )
 
