@@ -52,14 +52,14 @@ export default function Register() {
         <>
             <div className="flex align-items-center justify-content-center marginTop10p">
                 <div className="">
-                    <CustomInputField id='name' label='Name' value={name} setter={setName} />
-                    <CustomInputField id='username' label='Username' value={username} setter={setUsername} />
-                    <CustomInputField id='password' type="password" label='Password' value={password} setter={setPassword} />
-                    <CustomInputField id='number' label='Mobile Number' value={number} setter={setNumber} />
+                    <CustomInputField id='name' label='Name' value={name} setter={setName}/>
+                    <CustomInputField id='username' label='Username' value={username} setter={setUsername} className={'input'}/>
+                    <CustomInputField id='password' type="password" label='Password' value={password} setter={setPassword} className={'input'}/>
+                    <CustomInputField id='number' label='Mobile Number' value={number} setter={setNumber} className={'input'}/>
                     <CustomRadioButton labels={['Customer', 'Staff', 'Admin']} value={role} setter={setRole} />
 
                     <CustomButton label='Register' onClick={handleSubmit} />
-                    <LinkButton label='login' link='login' />
+                    <LinkButton label='login' link='login'  classNames={'input'}/>
                 </div>
             </div>
         </>

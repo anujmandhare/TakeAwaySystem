@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { POST } from "../Setup/Api";
 import { setUser, setLoadingTrue, setLoadingFalse } from "../Redux/User";
-import CONSTANTS from "../Setup/Constants.json";
+import CONSTANTS from "../Setup/Constants";
 import CustomInputField from "../Components/CustomInputField";
 import LinkButton from "../Components/LinkButton";
 import CustomButton from "../Components/CustomButton";
@@ -45,11 +45,11 @@ export default function Login() {
         <>
             <div className="flex align-items-center justify-content-center marginTop10p">
                 <div className="">
-                    <CustomInputField id='username' label='Username' value={username} setter={setUsername} />
-                    <CustomInputField id='password' type="password" label='Password' value={password} setter={setPassword} />
+                    <CustomInputField id='username' label='Username' value={username} setter={setUsername} className={'input'}/>
+                    <CustomInputField id='password' type="password" label='Password' value={password} setter={setPassword} className={'input'}/>
 
                     <CustomButton label='Login' onClick={handleSubmit} />
-                    <LinkButton label="Register" link='register' />
+                    <LinkButton label="Register" link='register' classNames={'input'}/>
                 </div>
             </div>
         </>

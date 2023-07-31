@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const Menu = new Schema(
     {
         name: { type: String, required: true },
-        price: { type: String, required: true },
+        price: { type: Number, required: true },
         ingredients: { type: String, required: true }
     }
 )

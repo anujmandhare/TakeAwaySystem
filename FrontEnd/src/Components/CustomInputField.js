@@ -2,14 +2,14 @@
 import { InputText } from "primereact/inputtext";
 
 
-export default function CustomInputField({ id, type = 'text', label, disabled = false, readOnly = false, value, setter, customElement, ...rest }) {
+export default function CustomInputField({ id, type = 'text', label, disabled = false, readOnly = false, value, setter, customElement, className, ...rest }) {
 
     return (
-        <div className="card flex justify-content-center input">
+        <div className={"card flex justify-content-center " + className}>
             {customElement ? customElement
                 : <span className="p-float-label">
                     <InputText id={id} type={type} disabled={disabled} readOnly={readOnly}
-                        value={value} onChange={(e) => setter(e.target.value)} {...rest}/>
+                        value={value} onChange={(e) => setter(e.target.value)} {...rest} />
                     <label htmlFor={id}>{label}</label>
                 </span>}
         </div>

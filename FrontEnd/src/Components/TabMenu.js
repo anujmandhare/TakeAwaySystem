@@ -3,11 +3,12 @@ import { TabView, TabPanel } from 'primereact/tabview';
 
 import Profile from '../Pages/Profile';
 import Orders from '../Pages/Orders';
+import OrderPreview from '../Pages/OrderPreview';
 import Menu from '../Pages/Menu';
 
 export default function CustomTabMenu({ tab, setTab }) {
 
-    const user = useSelector(_ => _.user);
+    const role = useSelector(_ => _.user.role);
 
     return (
         <div className="card">
@@ -18,9 +19,9 @@ export default function CustomTabMenu({ tab, setTab }) {
                 <TabPanel header="Menu">
                     <Menu />
                 </TabPanel>
-                {user.role === 'Customer' ?
+                {role === 'Customer' ?
                     <TabPanel header="Order Preview">
-                        <Orders />
+                        <OrderPreview />
                     </TabPanel>
                     :
                     <></>}

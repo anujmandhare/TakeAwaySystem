@@ -4,6 +4,7 @@ const cors = require('cors');
 const { PORT } = require('./setup/constants.json');
 const UserRouter = require('./routes/UserRouter');
 const MenuRouter = require('./routes/MenuRouter');
+const OrderRouter = require('./routes/OrderRouter');
 const errorHandler = require('./otherFiles/errorHandler');
 const database = require('./setup/mongoConnection');
 
@@ -16,6 +17,7 @@ app.use(cors());
 
 app.use('/user', UserRouter);
 app.use('/menu', MenuRouter);
+app.use('/order', OrderRouter);
 
 app.use(errorHandler);
 

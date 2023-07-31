@@ -1,17 +1,21 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 import MenuItemCard from '../Components/MenuItemCard';
-import CONSTANTS from '../Setup/Constants.json';
+import CONSTANTS from '../Setup/Constants';
 import CustomButton from '../Components/CustomButton';
 import { menuItems } from '../dummyData';
 import MenuPopup from '../Components/MenuPopup';
-import { useEffect, useState } from 'react';
 import { GET } from '../Setup/Api';
 import { removeMenuItem } from '../Redux/Data';
+import CustomTag from '../Components/CustomTag';
 
 
 export default function Menu() {
-    const { user, data } = useSelector(_ => _);
+    const user = useSelector(_ => _.user);
+    const order = useSelector(_ => _.order);
+    const [cartValue, setCartValue] = useState(getCartValue());
+
     const dispatch = useDispatch();
 
     const [showVisible, setShowVisible] = useState(false);
@@ -30,6 +34,10 @@ export default function Menu() {
 
     };
 
+    function getCartValue() {
+        return order.reduce((acc, ele) => Number(ele.price) + Number(acc), 0);
+    }
+
     const handleOpenClose = (booleanValue) => {
         dispatch(removeMenuItem());
         setShowVisible(booleanValue);
@@ -38,7 +46,8 @@ export default function Menu() {
 
     useEffect(() => {
         getAllMenuItems();
-    }, []);
+        setCartValue(getCartValue());
+    }, [order]);
 
     return (
         <>
@@ -53,9 +62,14 @@ export default function Menu() {
 
             {
                 menuItemList.length ?
-                    <div className="grid" style={{ overflowX: 'auto' }}>
-                        {menuItemList.map(_ => <MenuItemCard name={_.name} price={_.price} ingredients={_.ingredients} showPopup={setShowVisible} />)}
-                    </div>
+                    <>
+                        <div className='flex flex-row-reverse'>
+                            <CustomTag children={'Cart Value: ' + cartValue + '£'}></CustomTag>
+                        </div>
+                        <div className="grid" style={{ overflowX: 'auto' }}>
+                            {menuItemList.map((_, i) => <MenuItemCard id={_.name + i} name={_.name} price={_.price} ingredients={_.ingredients} showpop={setShowVisible} />)}
+                        </div>
+                    </>
                     :
                     <>{ErrorMsg}</>
             }

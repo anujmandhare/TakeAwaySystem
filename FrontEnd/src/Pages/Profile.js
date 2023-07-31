@@ -48,10 +48,10 @@ export default function Profile() {
 
     return (
         <div className="card">
-            <CustomInputField id='name' label='Name' value={name} setter={setName} />
-            <CustomInputField id='username' label='Username' disabled={true} value={username} setter={setUsername} />
-            <CustomInputField id='number' label='Mobile Number' value={number} setter={setNumber} />
-            <CustomInputField id='role' label='Role' disabled={true} value={role} setter={setRole} />
+            <CustomInputField id='name' label='Name' value={name} setter={setName} className={'input'}/>
+            <CustomInputField id='username' label='Username' disabled={true} value={username} setter={setUsername} className={'input'}/>
+            <CustomInputField id='number' label='Mobile Number' value={number} setter={setNumber} className={'input'}/>
+            <CustomInputField id='role' label='Role' disabled={true} value={role} setter={setRole} className={'input'}/>
 
             <CustomButton label='Update' onClick={handleUpdate} />
         </div>
