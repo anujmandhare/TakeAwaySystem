@@ -7,6 +7,7 @@ const MenuRouter = require('./routes/MenuRouter');
 const OrderRouter = require('./routes/OrderRouter');
 const errorHandler = require('./otherFiles/errorHandler');
 const database = require('./setup/mongoConnection');
+const { authenticateJWT } = require('./otherFiles/authenticateToken');
 
 var app = express();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/user', UserRouter);
+app.use(authenticateJWT);
 app.use('/menu', MenuRouter);
 app.use('/order', OrderRouter);
 

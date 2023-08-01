@@ -33,3 +33,7 @@ code {
 .marginLeft5p {
 margin-left: 5px;
 }
+
+.p-card {
+  padding:0 !important;
+}

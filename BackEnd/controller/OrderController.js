@@ -36,7 +36,23 @@ const placeOrder = async (req, res, next) => {
     }
 };
 
+const updateStatus = async (req, res, next) => {
+    try {
+
+        const payload = new Order(req.body);
+
+        const doc = await Order.findByIdAndUpdate(req.body.id, { status: payload.status }, { new: true });
+
+        if (doc) {
+            return res.status(CONSTANTS.STATUS_CODE.OK).send(`Status updated to ${payload.status}`);
+        } else {
+            throw Error(CONSTANTS.BAD_REQUEST, { cause: 'Error in placing order.' });
+        }
+    } catch (error) {
+        next(error);
+    }
+};
 
 module.exports = {
-    placeOrder, getAllOrders
+    placeOrder, getAllOrders, updateStatus
 }; 

@@ -22,7 +22,7 @@ export default function OrderPreview({ name, price, ingredients, className = '',
             alert('Please add items to place an order');
             return;
         }
-        const response = await POST(CONSTANTS.PLACE_ORDER, { note, data, date: new Date(), status: 'placed', username });
+        const response = await POST(CONSTANTS.PLACE_ORDER, { note, data, date: new Date(), status: 'Placed', username });
         dispatch(setLoadingTrue());
         if (response) {
             dispatch(clearCart());

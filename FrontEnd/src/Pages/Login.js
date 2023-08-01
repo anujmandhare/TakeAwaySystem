@@ -49,7 +49,7 @@ export default function Login() {
                     <CustomInputField id='password' type="password" label='Password' value={password} setter={setPassword} className={'input'}/>
 
                     <CustomButton label='Login' onClick={handleSubmit} />
-                    <LinkButton label="Register" link='register' classNames={'input'}/>
+                    <LinkButton label="Register" link='register' className={'input'}/>
                 </div>
             </div>
         </>

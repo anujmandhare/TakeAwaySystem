@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import CONSTANTS from '../Setup/Constants.json';
 import { GET } from '../Setup/Api';
@@ -11,7 +11,6 @@ export default function Orders() {
 
     const [orders, setOrders] = useState([]);
     const [ErrorMsg, setErrorMsg] = useState('');
-    const [showVisible, setShowVisible] = useState(false);
 
     const getAllOrders = async () => {
         const data = await GET(CONSTANTS.GET_ALL_ORDERS + '?username=' + username);
@@ -30,6 +29,7 @@ export default function Orders() {
         getAllOrders();
     }, []);
 
+
     return (
         <div id='ordersContainer' className="card">
 
@@ -37,7 +37,8 @@ export default function Orders() {
                 orders.length ?
                     <>
                         <div id='orders' className="grid" style={{ overflowX: 'auto' }}>
-                            {orders.map((_, i) => (<div key={i}></div>))}
+                            {orders.map((_, i) => (<OrderCard key={i} note={_.note} data={_.data} username={_.username}
+                                date={_.date} dstatus={_.status} id={_._id} getAllOrders={getAllOrders} />))}
                         </div>
                     </>
                     :

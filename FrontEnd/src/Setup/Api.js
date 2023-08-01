@@ -3,6 +3,12 @@ import axios from 'axios';
 import CONSTANTS from '../Setup/Constants.json';
 const { URL } = CONSTANTS;
 
+const getToken = () => {
+    const user = localStorage?.user ? JSON.parse(localStorage.user) : '';
+    const token = user.token;
+    return { 'Authorization': token };
+}
+
 const handleError = (error) => {
     if (error.response) {
         alert(error.response.data);
@@ -13,30 +19,35 @@ const handleError = (error) => {
     }
 }
 
-async function GET(path, payload) {
+async function GET(path) {
 
-    return axios.get(URL.concat(path), payload)
+    const headers = getToken();
+    const config = { headers }
+    return axios.get(URL.concat(path), config)
         .then(response => response.data)
         .catch(handleError);
 }
 
 async function POST(path, payload) {
 
-    return axios.post(URL.concat(path), payload)
+    const headers = getToken();
+    return axios.post(URL.concat(path), payload, { headers })
         .then(response => response.data)
         .catch(handleError);
 }
 
 async function PUT(path, payload) {
 
-    return axios.put(URL.concat(path), payload)
+    const headers = getToken();
+    return axios.put(URL.concat(path), payload, { headers })
         .then(response => response.data)
         .catch(handleError);
 }
 
 async function DELETE(path, payload) {
 
-    return axios.delete(URL.concat(path), payload)
+    const headers = getToken();
+    return axios.delete(URL.concat(path), payload, { headers })
         .then(response => response.data)
         .catch(handleError);
 }

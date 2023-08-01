@@ -1,43 +1,77 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card } from 'primereact/card';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import { setMenuItem } from '../Redux/Data';
-import { addToOrder } from '../Redux/Order';
 import CustomButton from './CustomButton';
+import CustomSingleSelect from './CustomSingleSelect';
+import CustomTable from './CustomTable';
+import CONSTANTS from '../Setup/Constants.json';
+import { POST } from '../Setup/Api';
 
-export default function MenuItemCard({ name, price, ingredients, className = '', showpop, id, ...rest }) {
+export default function OrderCard({ data, note, dstatus, date, username, className = '', showpop, id, getAllOrders, ...rest }) {
 
     const user = useSelector(_ => _.user);
-    const dispatch = useDispatch();
+
+    const [readOnly, setReadOnly] = useState(true);
+    const [status, setStatus] = useState({ name: dstatus });
+
+    const dd = date.slice(0, 10);
+    const tt = new Date(date).toLocaleTimeString().substring(0, 5);
+    const totalPrice = data.reduce((acc, ele) => ele.price + acc, 0);
+
+    const customerColumns = [{ field: 'name', header: 'Name' },
+    { field: 'price', header: 'Price' }];
+
+    const statusArray = [{ name: 'Placed', code: 'Placed' },
+    { name: 'Preparing', code: 'Preparing' },
+    { name: 'Prepared', code: 'Prepared' },
+    { name: 'Delivered', code: 'Delivered' },
+    { name: 'Declined', code: 'Declined' }]
 
     const handleEdit = () => {
-        dispatch(setMenuItem({ name, price, ingredients }));
-        showpop(true);
+        setReadOnly(!readOnly);
     }
 
-    const addItem = () => {
-        dispatch(addToOrder({ name, price }));
+
+    const updateStatus = async () => {
+        const data = await POST(CONSTANTS.UPDATE_STATUS, { id, status: status.name });
+        if (data) {
+            alert(data);
+            setReadOnly(true);
+            getAllOrders();
+        }
     }
 
-    const header = (
-        <img alt="Card" src="https://primefaces.org/cdn/primereact/images/usercard.png" />
-    );
 
     const footer = (info) => (
-        <div id={'buttondiv' + info.id} className="flex flex-wrap justify-content-end gap-2" >
-            {user.role === 'Admin' ? <CustomButton id={'buttonedit' + info.id} label="Edit" icon="pi pi-check" onClick={handleEdit} /> : <></>}
-            {user.role === 'Customer' ? <CustomButton id={'buttonadd' + info.id} label="Add to order" icon="pi pi-check" onClick={addItem} /> : <></>}
-        </div >
+        <>
+            {!readOnly ? <CustomSingleSelect options={statusArray} value={status} setter={setStatus} id='status' label='Status'
+                style={{ minWidth: '100%' }} /> : <></>}
+
+            <div id={'buttondiv' + info.id} className="flex flex-wrap justify-content-end button" >
+                {user.role === 'Staff' ? <CustomButton id={'buttonedit' + info.id} label={readOnly ? "Edit Status" : 'Cancel Edit'}
+                    icon="pi pi-check" onClick={handleEdit} severity='danger' size='small' /> : <></>}
+                {!readOnly ? <CustomButton id={'savebutton' + info.id} label="Update Status" icon="pi pi-check" onClick={updateStatus}
+                    className='marginLeft5p' size='small' /> : <></>}
+            </div >
+        </>
     );
+
+    useEffect(() => {
+        setStatus({ name: dstatus });
+    }, [dstatus])
+
 
     return (
         <div id={id} className="col-4">
-            <Card id={id} title={name} subTitle={price + ' £'} className={className} footer={footer} {...rest}>
-                <p id={id} className="m-0">
-                    {ingredients}
-                </p>
+            <Card id='orderCard' title={username} subTitle={'Order Status: ' + dstatus} className={className} footer={footer} {...rest}>
+                <div><span>Date: {dd} </span><span style={{ marginLeft: '10px' }}></span><span>  Time: {tt}</span></div>
+                <hr />
+
+                <CustomTable data={data} columnHeaders={customerColumns} className='col-12' />
+                <div className='flex flex-row-reverse' style={{ fontWeight: 'bold' }}><div style={{ width: '15%' }}></div>Total: {totalPrice}£</div>
+                <div className='button'>Note: {note}</div>
             </Card>
-        </div>
+        </div >
     )
 }

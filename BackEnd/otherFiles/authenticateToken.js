@@ -11,20 +11,20 @@ const createToken = ({ username, role }) => {
 
 
 const authenticateJWT = (request, response, next) => {
-    const token = request.headers.token;
+    const token = request.headers.authorization;
 
     if (token) {
 
         jwt.verify(token, CONSTANTS.SECRET, (error, user) => {
             if (error) {
-                throw Error(CONSTANTS.STATUS_CODE.FORBIDDEN);
+                throw Error(CONSTANTS.FORBIDDEN);
             }
 
             response.user = user;
             next();
         });
     } else {
-        throw Error(CONSTANTS.STATUS_CODE.UNAUTHORISED);
+        throw Error(CONSTANTS.UNAUTHORISED);
     }
 };
 

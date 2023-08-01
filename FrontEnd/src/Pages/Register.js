@@ -59,7 +59,7 @@ export default function Register() {
                     <CustomRadioButton labels={['Customer', 'Staff', 'Admin']} value={role} setter={setRole} />
 
                     <CustomButton label='Register' onClick={handleSubmit} />
-                    <LinkButton label='login' link='login'  classNames={'input'}/>
+                    <LinkButton label='login' link='login'  className={'input'}/>
                 </div>
             </div>
         </>
