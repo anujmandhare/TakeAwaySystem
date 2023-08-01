@@ -11,7 +11,7 @@ export default function CustomTabMenu({ tab, setTab }) {
     const role = useSelector(_ => _.user.role);
 
     return (
-        <div className="card">
+        <div id='TabView' className="card">
             <TabView activeIndex={tab} onTabChange={(e) => setTab(e.index)}>
                 <TabPanel header="Profile">
                     <Profile />

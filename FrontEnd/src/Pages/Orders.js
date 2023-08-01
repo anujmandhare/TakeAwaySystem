@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import CONSTANTS from '../Setup/Constants.json';
 import { GET } from '../Setup/Api';
-import MenuItemCard from '../Components/MenuItemCard';
+import OrderCard from '../Components/OrderCard';
 
 export default function Orders() {
 
@@ -31,13 +31,13 @@ export default function Orders() {
     }, []);
 
     return (
-        <div className="card">
+        <div id='ordersContainer' className="card">
 
             {
                 orders.length ?
                     <>
-                        <div className="grid" style={{ overflowX: 'auto' }}>
-                            {orders.map((_, i) => <MenuItemCard id={_.name + i} name={_.name} price={_.price} ingredients={_.ingredients} showpop={setShowVisible} />)}
+                        <div id='orders' className="grid" style={{ overflowX: 'auto' }}>
+                            {orders.map((_, i) => (<div key={i}></div>))}
                         </div>
                     </>
                     :

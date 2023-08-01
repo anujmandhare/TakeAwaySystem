@@ -44,7 +44,7 @@ export default function Login() {
     return (
         <>
             <div className="flex align-items-center justify-content-center marginTop10p">
-                <div className="">
+                <div>
                     <CustomInputField id='username' label='Username' value={username} setter={setUsername} className={'input'}/>
                     <CustomInputField id='password' type="password" label='Password' value={password} setter={setPassword} className={'input'}/>
 

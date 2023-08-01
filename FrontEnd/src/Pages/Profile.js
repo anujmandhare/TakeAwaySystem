@@ -47,7 +47,7 @@ export default function Profile() {
 
 
     return (
-        <div className="card">
+        <div id='profile' className="card">
             <CustomInputField id='name' label='Name' value={name} setter={setName} className={'input'}/>
             <CustomInputField id='username' label='Username' disabled={true} value={username} setter={setUsername} className={'input'}/>
             <CustomInputField id='number' label='Mobile Number' value={number} setter={setNumber} className={'input'}/>

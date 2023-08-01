@@ -20,7 +20,7 @@ export default function NavBar() {
     const end = user.username ? <CustomButton onClick={handleLogout} label='logout' id='logout' /> : <></>;
 
     return (
-        <div className="card">
+        <div id='NavBar' className="card">
             <Menubar start={start} end={end} />
         </div>
     )
