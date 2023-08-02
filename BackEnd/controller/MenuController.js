@@ -45,19 +45,12 @@ const addMenuItem = async (req, res, next) => {
 const updateMenuItem = async (req, res, next) => {
     try {
 
-        const { name, price, ingredients } = new Menu(req.body);
+        const { name, price, ingredients, _id } = new Menu(req.body);
 
-        const data = await Menu.findByIdAndUpdate({ name }, { name, price, ingredients }, { new: true });
+        const data = await Menu.findByIdAndUpdate(_id, { name, price, ingredients }, { new: true });
 
-        return;
         if (data) {
-            throw Error(CONSTANTS.BAD_REQUEST, { cause: 'Item already exists in the Menu!' });
-        }
-
-        const doc = await payload.save();
-
-        if (doc) {
-            return res.status(CONSTANTS.STATUS_CODE.OK).send(`Item ${payload.name} added to the menu.`);
+            return res.status(CONSTANTS.STATUS_CODE.OK).send(`Item updated Successfully.`);
         } else {
             throw Error(CONSTANTS.BAD_REQUEST, { cause: 'Incorrect Data' });
         }

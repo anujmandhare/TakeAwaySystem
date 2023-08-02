@@ -40,14 +40,13 @@ const register = async (req, res, next) => {
             payload.password = await hashedPassword(payload.password);
 
             //Uncomment below line for skipping email verification
-            payload.verified = true;
+            // payload.verified = true;
 
-            // await sendVerificationMail(payload.username);
+            await sendVerificationMail(payload.username);
 
             await payload.save()
             res.send(`User ${'name'} registered with id ${payload.username}!!! \nPlease verify your email by clicking on the link received in your email.`);
 
-            // res.status(CONSTANTS.STATUS_CODE.OK).send({ username: payload.username });
         } else {
             throw Error(CONSTANTS.BAD_REQUEST, { cause: 'User already registered' });
         }

@@ -67,14 +67,15 @@ export default function Menu() {
                             <CustomTag children={'Cart Value: ' + cartValue + '£'}></CustomTag>
                         </div> : <></>}
                         <div className="grid" style={{ overflowX: 'auto' }}>
-                            {menuItemList.map((_, i) => <MenuItemCard key={'menuCard' + i} id={_.name + i} name={_.name} price={_.price} ingredients={_.ingredients} showpop={setShowVisible} />)}
+                            {menuItemList.map((_, i) => <MenuItemCard key={'menuCard' + i} id={_.name + i} _id={_._id}
+                                name={_.name} price={_.price} ingredients={_.ingredients} showpop={setShowVisible} />)}
                         </div>
                     </>
                     :
                     <>{ErrorMsg}</>
             }
 
-            <MenuPopup visible={showVisible} close={handleOpenClose} />
+            <MenuPopup visible={showVisible} close={handleOpenClose} getAllMenuItems={getAllMenuItems} />
         </>
     )
 }

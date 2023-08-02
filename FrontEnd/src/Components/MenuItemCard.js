@@ -6,13 +6,13 @@ import { setMenuItem } from '../Redux/Data';
 import { addToOrder } from '../Redux/Order';
 import CustomButton from './CustomButton';
 
-export default function MenuItemCard({ name, price, ingredients, className = '', showpop, id, ...rest }) {
+export default function MenuItemCard({ name, price, ingredients, className = '', showpop, id, _id, ...rest }) {
 
     const user = useSelector(_ => _.user);
     const dispatch = useDispatch();
 
     const handleEdit = () => {
-        dispatch(setMenuItem({ name, price, ingredients }));
+        dispatch(setMenuItem({ name, price, ingredients, _id }));
         showpop(true);
     }
 

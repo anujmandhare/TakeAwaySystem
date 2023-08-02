@@ -10,7 +10,7 @@ import CONSTANTS from '../Setup/Constants.json';
 import CustomInputField from './CustomInputField';
 import CustomTextArea from "./CustomTextArea";
 
-export default function FooterDemo({ close, visible, ...rest }) {
+export default function MenuPopup({ close, visible, getAllMenuItems, ...rest }) {
 
     const data = useSelector(_ => _.data);
 
@@ -25,22 +25,24 @@ export default function FooterDemo({ close, visible, ...rest }) {
     }, [data]);
 
 
-    const addMenuItem = async () => {
-        try {
-            const data = await POST(CONSTANTS.ADD_MENU_ITEM, { name, price, ingredients });
-            if (data) {
-                alert(data);
-                close(false);
-            }
-        } catch (error) {
-
+    const addUpdateMenuItem = async () => {
+        let data1;
+        if (data?._id) {
+            data1 = await POST(CONSTANTS.UPDATE_MENU_ITEM, { name, price, ingredients, _id: data._id });
+        } else {
+            data1 = await POST(CONSTANTS.ADD_MENU_ITEM, { name, price, ingredients });
+        }
+        if (data1) {
+            alert(data1);
+            close(false);
+            getAllMenuItems();
         }
     };
 
     const footerContent = (
         <div>
             <Button label="Discard" icon="pi pi-times" onClick={() => close(false)} className="p-button-text" />
-            <Button label="Save" icon="pi pi-check" onClick={() => addMenuItem(false)} autoFocus />
+            <Button label="Save" icon="pi pi-check" onClick={() => addUpdateMenuItem(false)} autoFocus />
         </div>
     );
 
