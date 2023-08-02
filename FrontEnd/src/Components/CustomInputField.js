@@ -7,7 +7,7 @@ export default function CustomInputField({ id, type = 'text', label, disabled = 
     return (
         <div className={"card flex justify-content-center " + className}>
             {customElement ? customElement
-                : <span className="p-float-label">
+                : <span className="p-float-label" {...rest}>
                     <InputText id={id} type={type} disabled={disabled} readOnly={readOnly}
                         value={value} onChange={(e) => setter(e.target.value)} {...rest} />
                     <label htmlFor={id}>{label}</label>

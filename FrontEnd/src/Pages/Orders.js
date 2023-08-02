@@ -38,7 +38,7 @@ export default function Orders() {
                     <>
                         <div id='orders' className="grid" style={{ overflowX: 'auto' }}>
                             {orders.map((_, i) => (<OrderCard key={i} note={_.note} data={_.data} username={_.username}
-                                date={_.date} dstatus={_.status} id={_._id} getAllOrders={getAllOrders} />))}
+                                date={_.date} dstatus={_.status} id={_._id} dfeedback={_.feedback} getAllOrders={getAllOrders} />))}
                         </div>
                     </>
                     :

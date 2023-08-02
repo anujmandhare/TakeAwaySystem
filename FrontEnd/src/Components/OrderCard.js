@@ -4,16 +4,19 @@ import { useSelector } from 'react-redux';
 
 import CustomButton from './CustomButton';
 import CustomSingleSelect from './CustomSingleSelect';
+import CustomInputField from './CustomInputField';
 import CustomTable from './CustomTable';
 import CONSTANTS from '../Setup/Constants.json';
 import { POST } from '../Setup/Api';
 
-export default function OrderCard({ data, note, dstatus, date, username, className = '', showpop, id, getAllOrders, ...rest }) {
+export default function OrderCard({ data, note, dstatus, dfeedback, date, username, className = '', showpop, id,
+    getAllOrders, ...rest }) {
 
     const user = useSelector(_ => _.user);
 
     const [readOnly, setReadOnly] = useState(true);
     const [status, setStatus] = useState({ name: dstatus });
+    const [feedback, setFeedback] = useState('');
 
     const dd = date.slice(0, 10);
     const tt = new Date(date).toLocaleTimeString().substring(0, 5);
@@ -32,8 +35,9 @@ export default function OrderCard({ data, note, dstatus, date, username, classNa
 
 
     const updateStatus = async ({ st }) => {
-        const sts = st ? st : status.name;
-        const data = await POST(CONSTANTS.UPDATE_STATUS, { id, status: sts });
+        const sts = st ? st : status?.name;
+        const feedback1 = feedback ? feedback : undefined;
+        const data = await POST(CONSTANTS.UPDATE_STATUS, { id, status: sts, feedback: feedback1 });
         if (data) {
             alert(data);
             setReadOnly(true);
@@ -47,6 +51,11 @@ export default function OrderCard({ data, note, dstatus, date, username, classNa
             {!readOnly ? <CustomSingleSelect options={statusArray} value={status} setter={setStatus} id='status' label='Status'
                 style={{ minWidth: '100%' }} /> : <></>}
 
+            {!dfeedback && user.role === 'Customer' && dstatus === 'Delivered' ?
+                <CustomInputField id='feedback' label='Feedback' value={feedback} setter={setFeedback}
+                    className={'input'} style={{ width: '100%' }} />
+                : <></>}
+
             <div id={'buttondiv' + info.id} className="flex flex-wrap justify-content-end button" >
 
                 {user.role === 'Staff' && dstatus === 'Placed' ? <CustomButton id={'buttondecling' + info.id} label={'Decline'}
@@ -57,6 +66,10 @@ export default function OrderCard({ data, note, dstatus, date, username, classNa
 
                 {!readOnly ? <CustomButton id={'savebutton' + info.id} label="Update" icon="pi pi-check" onClick={updateStatus}
                     className='marginLeft5p' size='small' /> : <></>}
+
+                {user.role === 'Customer' && dstatus === 'Delivered' && !dfeedback ?
+                    <CustomButton id={'savebutton' + info.id} label="Update" icon="pi pi-check" onClick={updateStatus}
+                        className='marginLeft5p' size='small' /> : <></>}
             </div >
         </>
     );
@@ -69,12 +82,19 @@ export default function OrderCard({ data, note, dstatus, date, username, classNa
     return (
         <div id={id} className="col-4">
             <Card id='orderCard' title={username} subTitle={'Order Status: ' + dstatus} className={className} footer={footer} {...rest}>
+
                 <div><span>Date: {dd} </span><span style={{ marginLeft: '10px' }}></span><span>  Time: {tt}</span></div>
+
                 <hr />
 
                 <CustomTable data={data} columnHeaders={customerColumns} className='col-12' />
-                <div className='flex flex-row-reverse' style={{ fontWeight: 'bold' }}><div style={{ width: '15%' }}></div>Total: {totalPrice}£</div>
+                <div className='flex flex-row-reverse' style={{ fontWeight: 'bold' }}>
+                    <div style={{ width: '15%' }}></div>Total: {totalPrice}£</div>
+
+                <hr />
+
                 {note ? <div className='button'>Note: {note}</div> : <></>}
+                {dfeedback ? <div className='button'>Feedback: {dfeedback}</div> : <></>}
             </Card>
         </div >
     )

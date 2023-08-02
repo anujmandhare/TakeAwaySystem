@@ -19,6 +19,7 @@ export const user = createSlice({
             state.username = "";
             state = {};
             localStorage.removeItem('user');
+            localStorage.removeItem('order');
         },
         setLoadingTrue: (state) => {
             document.body.style = 'pointer-events: none;'

@@ -6,11 +6,11 @@ export default function CustomRadioButton({ labels, value, setter, ...rest }) {
     return (
         <div className="card flex justify-content-center input">
             <div className="flex flex-wrap gap-3">
-                {labels.map(_ => {
-                    return <div className="flex align-items-center">
-                        <RadioButton inputId={_} name={_} value={_} onChange={(e) => setter(e.value)} checked={value === _}
+                {labels.map((_, i) => {
+                    return <div key={'d' + _ + i} className="flex align-items-center">
+                        <RadioButton key={'b' + _ + i} inputId={_} name={_} value={_} onChange={(e) => setter(e.value)} checked={value === _}
                             {...rest} />
-                        <label htmlFor={_} className="ml-2">{_}</label>
+                        <label key={'l' + _ + i} htmlFor={_} className="ml-2">{_}</label>
                     </div>
                 })
                 }

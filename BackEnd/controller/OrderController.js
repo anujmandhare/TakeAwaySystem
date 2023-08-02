@@ -45,12 +45,16 @@ const placeOrder = async (req, res, next) => {
 const updateStatus = async (req, res, next) => {
     try {
 
-        const payload = new Order(req.body);
+        const { status, feedback } = new Order(req.body);
 
-        const doc = await Order.findByIdAndUpdate(req.body.id, { status: payload.status }, { new: true });
+        const doc = await Order.findByIdAndUpdate(req.body.id, { status, feedback }, { new: true });
 
         if (doc) {
-            return res.status(CONSTANTS.STATUS_CODE.OK).send(`Status updated to ${payload.status}`);
+            if (feedback) {
+                return res.status(CONSTANTS.STATUS_CODE.OK).send(`Feedback submitted successfully.`);
+            } else {
+                return res.status(CONSTANTS.STATUS_CODE.OK).send(`Status updated to ${status}`);
+            }
         } else {
             throw Error(CONSTANTS.BAD_REQUEST, { cause: 'Error in placing order.' });
         }
