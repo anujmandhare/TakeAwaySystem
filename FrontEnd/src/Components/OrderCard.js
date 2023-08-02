@@ -22,19 +22,18 @@ export default function OrderCard({ data, note, dstatus, date, username, classNa
     const customerColumns = [{ field: 'name', header: 'Name' },
     { field: 'price', header: 'Price' }];
 
-    const statusArray = [{ name: 'Placed', code: 'Placed' },
-    { name: 'Preparing', code: 'Preparing' },
+    const statusArray = [{ name: 'Preparing', code: 'Preparing' },
     { name: 'Prepared', code: 'Prepared' },
-    { name: 'Delivered', code: 'Delivered' },
-    { name: 'Declined', code: 'Declined' }]
+    { name: 'Delivered', code: 'Delivered' }]
 
     const handleEdit = () => {
         setReadOnly(!readOnly);
     }
 
 
-    const updateStatus = async () => {
-        const data = await POST(CONSTANTS.UPDATE_STATUS, { id, status: status.name });
+    const updateStatus = async ({ st }) => {
+        const sts = st ? st : status.name;
+        const data = await POST(CONSTANTS.UPDATE_STATUS, { id, status: sts });
         if (data) {
             alert(data);
             setReadOnly(true);
@@ -49,9 +48,14 @@ export default function OrderCard({ data, note, dstatus, date, username, classNa
                 style={{ minWidth: '100%' }} /> : <></>}
 
             <div id={'buttondiv' + info.id} className="flex flex-wrap justify-content-end button" >
-                {user.role === 'Staff' ? <CustomButton id={'buttonedit' + info.id} label={readOnly ? "Edit Status" : 'Cancel Edit'}
-                    icon="pi pi-check" onClick={handleEdit} severity='danger' size='small' /> : <></>}
-                {!readOnly ? <CustomButton id={'savebutton' + info.id} label="Update Status" icon="pi pi-check" onClick={updateStatus}
+
+                {user.role === 'Staff' && dstatus === 'Placed' ? <CustomButton id={'buttondecling' + info.id} label={'Decline'}
+                    icon="pi pi-check" onClick={() => updateStatus({ st: 'Declined' })} severity='warning' size='small' /> : <></>}
+
+                {user.role === 'Staff' && dstatus !== 'Delivered' && dstatus !== 'Declined' ? <CustomButton id={'buttonedit' + info.id} label={readOnly ? "Edit Status" : 'Cancel'}
+                    icon="pi pi-check" onClick={handleEdit} className='marginLeft5p' severity='danger' size='small' /> : <></>}
+
+                {!readOnly ? <CustomButton id={'savebutton' + info.id} label="Update" icon="pi pi-check" onClick={updateStatus}
                     className='marginLeft5p' size='small' /> : <></>}
             </div >
         </>
@@ -70,7 +74,7 @@ export default function OrderCard({ data, note, dstatus, date, username, classNa
 
                 <CustomTable data={data} columnHeaders={customerColumns} className='col-12' />
                 <div className='flex flex-row-reverse' style={{ fontWeight: 'bold' }}><div style={{ width: '15%' }}></div>Total: {totalPrice}£</div>
-                <div className='button'>Note: {note}</div>
+                {note ? <div className='button'>Note: {note}</div> : <></>}
             </Card>
         </div >
     )

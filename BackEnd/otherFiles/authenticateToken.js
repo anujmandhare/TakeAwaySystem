@@ -20,7 +20,7 @@ const authenticateJWT = (request, response, next) => {
                 throw Error(CONSTANTS.FORBIDDEN);
             }
 
-            response.user = user;
+            request.user = user;
             next();
         });
     } else {

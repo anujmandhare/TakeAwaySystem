@@ -48,8 +48,8 @@ export default function FooterDemo({ close, visible, ...rest }) {
     return (
         <div className="card flex justify-content-center">
             <Dialog header="Enter Menu Item Details" visible={visible} style={{ width: '50vw' }} onHide={() => close(false)} footer={footerContent}>
-                <CustomInputField id='name' label='Item Name' value={name} setter={setName} />
-                <CustomInputField id='price' type='number' label='Item Price' value={price} setter={setPrice} />
+                <CustomInputField id='name' label='Item Name' value={name} setter={setName} className={'input'} />
+                <CustomInputField id='price' type='number' label='Item Price' value={price} setter={setPrice} className={'input'} />
                 <CustomTextArea id='ingredients' label='Ingredients' rows='5' cols='30' value={ingredients} setter={setIngredients} />
             </Dialog>
         </div>

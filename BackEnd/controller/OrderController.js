@@ -6,8 +6,14 @@ const getAllOrders = async (req, res, next) => {
     try {
 
         const username = req.query.username;
+        const role = req.user?.role;
+        let doc;
 
-        const doc = await Order.find({ username });
+        if (role !== 'Customer') {
+            doc = await Order.find();
+        } else {
+            doc = await Order.find({ username });
+        }
 
         if (doc.length) {
             return res.status(CONSTANTS.STATUS_CODE.OK).send(doc);

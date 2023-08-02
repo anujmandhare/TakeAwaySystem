@@ -63,9 +63,9 @@ export default function Menu() {
             {
                 menuItemList.length ?
                     <>
-                        <div className='flex flex-row-reverse'>
+                        {user.role === 'Customer' ? <div className='flex flex-row-reverse'>
                             <CustomTag children={'Cart Value: ' + cartValue + '£'}></CustomTag>
-                        </div>
+                        </div> : <></>}
                         <div className="grid" style={{ overflowX: 'auto' }}>
                             {menuItemList.map((_, i) => <MenuItemCard key={'menuCard' + i} id={_.name + i} name={_.name} price={_.price} ingredients={_.ingredients} showpop={setShowVisible} />)}
                         </div>
