@@ -11,14 +11,15 @@
         {
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
-            "name": "nodemon",
+            "name": "Nodemon",
             "program": "${workspaceFolder}/backend/app.js",
             "request": "launch",
             "restart": true,
             "runtimeExecutable": "nodemon",
             "skipFiles": [
                 "<node_internals>/**",
-                "${workspaceFolder}/client"
+                "${workspaceFolder}/client",
+                "${workspaceFolder}/FrontEnd"
             ],
             "type": "node"
         },
@@ -27,7 +28,7 @@
             "name": "Node",
             "request": "launch",
             "command": "node app.js",
-            "cwd": "${workspaceFolder}/backend"
+            "cwd": "${workspaceFolder}/Backend"
         }
     ]
 }

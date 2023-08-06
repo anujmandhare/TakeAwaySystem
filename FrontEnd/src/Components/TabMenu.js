@@ -5,6 +5,7 @@ import Profile from '../Pages/Profile';
 import Orders from '../Pages/Orders';
 import OrderPreview from '../Pages/OrderPreview';
 import Menu from '../Pages/Menu';
+import PreviousOrders from '../Pages/PreviousOrders';
 
 export default function CustomTabMenu({ tab, setTab }) {
 
@@ -25,8 +26,11 @@ export default function CustomTabMenu({ tab, setTab }) {
                     </TabPanel>
                     :
                     <></>}
-                <TabPanel header="Orders">
+                <TabPanel header="Current Orders">
                     <Orders />
+                </TabPanel>
+                <TabPanel header="Previous Orders">
+                    <PreviousOrders />
                 </TabPanel>
             </TabView>
         </div>

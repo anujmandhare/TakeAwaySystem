@@ -53,7 +53,7 @@ export default function Menu() {
         <>
             {
                 user.role === 'Admin' ?
-                    <div className='flex-row'>
+                    <div className='flex-row marginBottom10p'>
                         <CustomButton id='addMenuItem' label='Add Menu Item' size="large" onClick={() => handleOpenClose(true)} />
                     </div>
                     :
@@ -63,7 +63,7 @@ export default function Menu() {
             {
                 menuItemList.length ?
                     <>
-                        {user.role === 'Customer' ? <div className='flex flex-row-reverse'>
+                        {user.role === 'Customer' ? <div className='flex flex-row-reverse '>
                             <CustomTag children={'Cart Value: ' + cartValue + '£'}></CustomTag>
                         </div> : <></>}
                         <div className="grid" style={{ overflowX: 'auto' }}>

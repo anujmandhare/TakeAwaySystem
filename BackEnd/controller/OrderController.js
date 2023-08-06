@@ -16,7 +16,7 @@ const getAllOrders = async (req, res, next) => {
         }
 
         if (doc.length) {
-            return res.status(CONSTANTS.STATUS_CODE.OK).send(doc);
+            return res.status(CONSTANTS.STATUS_CODE.OK).send(doc.sort((a, b) => a.date < b.data ? 0 : -1));
         } else {
             throw Error(CONSTANTS.BAD_REQUEST, { cause: 'Error in fetching orders.' });
         }
