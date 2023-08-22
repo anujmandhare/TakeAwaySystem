@@ -2,11 +2,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Launch Chrome",
+            "type": "node-terminal",
+            "name": "Node",
             "request": "launch",
-            "type": "chrome",
-            "url": "http://localhost:3000",
-            "webRoot": "${workspaceFolder}"
+            "command": "node app.js",
+            "cwd": "${workspaceFolder}/Backend"
         },
         {
             "console": "integratedTerminal",
@@ -24,11 +24,11 @@
             "type": "node"
         },
         {
-            "type": "node-terminal",
-            "name": "Node",
+            "name": "Launch Chrome",
             "request": "launch",
-            "command": "node app.js",
-            "cwd": "${workspaceFolder}/Backend"
+            "type": "chrome",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}"
         }
     ]
 }
