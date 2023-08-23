@@ -54,7 +54,9 @@ export default function Menu() {
             {
                 user.role === 'Admin' ?
                     <div className='flex-row marginBottom10p'>
-                        <CustomButton id='addMenuItem' label='Add Menu Item' size="large" onClick={() => handleOpenClose(true)} />
+                        <CustomButton id='addMenuItem' label='Add Menu Item' size="large" onClick={() => handleOpenClose(true)}
+                            tooltip={CONSTANTS.TOOLTIPS.ADD_TO_MENU}
+                        />
                     </div>
                     :
                     <></>
@@ -64,7 +66,7 @@ export default function Menu() {
                 menuItemList.length ?
                     <>
                         {user.role === 'Customer' ? <div className='flex flex-row-reverse '>
-                            <CustomTag children={'Cart Value: ' + cartValue + '£'}></CustomTag>
+                            <CustomTag children={'Cart Value: ' + cartValue + '£'} tooltip={CONSTANTS.TOOLTIPS.CART + ' ' + cartValue + '£'}></CustomTag>
                         </div> : <></>}
                         <div className="grid" style={{ overflowX: 'auto' }}>
                             {menuItemList.map((_, i) => <MenuItemCard key={'menuCard' + i} id={_.name + i} _id={_._id}

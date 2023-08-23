@@ -41,8 +41,13 @@ export default function MenuPopup({ close, visible, getAllMenuItems, ...rest }) 
 
     const footerContent = (
         <div>
-            <Button label="Discard" icon="pi pi-times" onClick={() => close(false)} className="p-button-text" />
-            <Button label="Save" icon="pi pi-check" onClick={() => addUpdateMenuItem(false)} autoFocus />
+            <Button label="Discard" icon="pi pi-times" onClick={() => close(false)} className="p-button-text"
+                tooltip={CONSTANTS.TOOLTIPS.DISCARD}
+            />
+
+            <Button label="Save" onClick={() => addUpdateMenuItem(false)} autoFocus
+                tooltip={CONSTANTS.TOOLTIPS.SAVE}
+            />
         </div>
     );
 
@@ -50,9 +55,19 @@ export default function MenuPopup({ close, visible, getAllMenuItems, ...rest }) 
     return (
         <div className="card flex justify-content-center">
             <Dialog header="Enter Menu Item Details" visible={visible} style={{ width: '50vw' }} onHide={() => close(false)} footer={footerContent}>
-                <CustomInputField id='name' label='Item Name' value={name} setter={setName} className={'input'} />
-                <CustomInputField id='price' type='number' label='Item Price' value={price} setter={setPrice} className={'input'} />
-                <CustomTextArea id='ingredients' label='Ingredients' rows='5' cols='30' value={ingredients} setter={setIngredients} />
+
+                <CustomInputField id='name' label='Item Name' value={name} setter={setName} className={'input'}
+                    tooltip={CONSTANTS.TOOLTIPS.DISCARD}
+                />
+
+                <CustomInputField id='price' type='number' label='Item Price' value={price} setter={setPrice} className={'input'}
+                    tooltip={CONSTANTS.TOOLTIPS.COST}
+                />
+
+                <CustomTextArea id='ingredients' label='Ingredients' rows='5' cols='30' value={ingredients} setter={setIngredients}
+                    tooltip={CONSTANTS.TOOLTIPS.INGREDIENTS}
+                />
+
             </Dialog>
         </div>
     )

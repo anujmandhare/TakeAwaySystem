@@ -1,9 +1,15 @@
 
 import React from 'react';
 import { Tag } from 'primereact/tag';
+import { Tooltip } from 'primereact/tooltip';
+
+
 
 export default function CustomTag({ children, tooltip }) {
     return (
-        <Tag className='customTag' tooltip={tooltip}>{children}</Tag>
+        <span>
+            <Tooltip target=".customTag" >{tooltip}</Tooltip>
+            <Tag className='customTag' data-pr-position="left">{children}</Tag>
+        </span>
     );
 }

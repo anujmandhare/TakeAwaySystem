@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 import { TabView, TabPanel } from 'primereact/tabview';
 
-import CONSTANTS from '../Setup/Constants.json';
 import Profile from '../Pages/Profile';
 import Orders from '../Pages/Orders';
 import OrderPreview from '../Pages/OrderPreview';
@@ -15,22 +14,22 @@ export default function CustomTabMenu({ tab, setTab }) {
     return (
         <div id='TabView' className="card">
             <TabView activeIndex={tab} onTabChange={(e) => setTab(e.index)}>
-                <TabPanel header="Profile">
+                <TabPanel header="Profile" leftIcon='pi pi-user-edit mr-2'>
                     <Profile />
                 </TabPanel>
-                <TabPanel header="Menu">
+                <TabPanel header="Menu" leftIcon='pi pi-list mr-2'>
                     <Menu />
                 </TabPanel>
                 {role === 'Customer' ?
-                    <TabPanel header="Order Preview">
+                    <TabPanel header="Order Preview" leftIcon='pi pi-cart-plus mr-2'>
                         <OrderPreview />
                     </TabPanel>
                     :
                     <></>}
-                <TabPanel header="Current Orders">
+                <TabPanel header="Current Orders" leftIcon='pi pi-shopping-cart mr-2'>
                     <Orders />
                 </TabPanel>
-                <TabPanel header="Previous Orders">
+                <TabPanel header="Previous Orders" leftIcon='pi pi-shopping-bag mr-2'>
                     <PreviousOrders />
                 </TabPanel>
             </TabView>

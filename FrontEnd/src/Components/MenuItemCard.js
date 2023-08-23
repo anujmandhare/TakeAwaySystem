@@ -2,6 +2,7 @@ import React from 'react';
 import { Card } from 'primereact/card';
 import { useDispatch, useSelector } from 'react-redux';
 
+import CONSTANTS from '../Setup/Constants.json';
 import { setMenuItem } from '../Redux/Data';
 import { addToOrder } from '../Redux/Order';
 import CustomButton from './CustomButton';
@@ -26,8 +27,19 @@ export default function MenuItemCard({ name, price, ingredients, className = '',
 
     const footer = (info) => (
         <div id={'buttondiv' + info.id} className="flex flex-wrap justify-content-end gap-2" >
-            {user.role === 'Admin' ? <CustomButton id={'buttonedit' + info.id} label="Edit" icon="pi pi-check" onClick={handleEdit} /> : <></>}
-            {user.role === 'Customer' ? <CustomButton id={'buttonadd' + info.id} label="Add to order" icon="pi pi-check" onClick={addItem} /> : <></>}
+            {user.role === 'Admin' ?
+                <CustomButton id={'buttonedit' + info.id} label="Edit" onClick={handleEdit}
+                    tooltip={CONSTANTS.TOOLTIPS.EDIT} tooltipOptions={{ position: 'left' }}
+                />
+                :
+                <></>}
+
+            {user.role === 'Customer' ?
+                <CustomButton id={'buttonadd' + info.id} label="Add to order" onClick={addItem}
+                    tooltip={CONSTANTS.TOOLTIPS.ADD_TO_ORDER} tooltipOptions={{ position: 'left' }}
+                />
+                :
+                <></>}
         </div >
     );
 

@@ -33,6 +33,9 @@ code {
   margin-top: 5px;
 }
 
+.button2 {
+  margin-top: 5px;
+}
 .customTag {
   display:inline-flex !important;
   align-items: normal !important;
@@ -44,4 +47,10 @@ code {
 
 .p-card {
   padding:0 !important;
+}
+
+.p-card .p-card-subtitle {
+  color: #495057 !important;
+  font-weight: bold !important;
+  margin-bottom: 0% !important;
 }

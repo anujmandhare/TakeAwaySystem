@@ -8,6 +8,7 @@ import CustomInputField from './CustomInputField';
 import CustomTable from './CustomTable';
 import CONSTANTS from '../Setup/Constants.json';
 import { POST } from '../Setup/Api';
+import { Tooltip } from 'primereact/tooltip';
 
 export default function OrderCard({ data, note, dstatus, dfeedback, date, username, className = '', showpop, id,
     getAllOrders, ...rest }) {
@@ -48,28 +49,59 @@ export default function OrderCard({ data, note, dstatus, dfeedback, date, userna
 
     const footer = (info) => (
         <>
-            {!readOnly ? <CustomSingleSelect options={statusArray} value={status} setter={setStatus} id='status' label='Status'
-                style={{ minWidth: '100%' }} /> : <></>}
+            {!readOnly ?
+                <CustomSingleSelect options={statusArray} value={status} setter={setStatus} id='status' label='Status'
+                    style={{ minWidth: '100%' }} tooltip="Order Status"
+                />
+                :
+                <></>
+            }
 
             {!dfeedback && user.role === 'Customer' && dstatus === 'Delivered' ?
                 <CustomInputField id='feedback' label='Feedback' value={feedback} setter={setFeedback}
-                    className={'input'} style={{ width: '100%' }} />
-                : <></>}
+                    className={'input'} style={{ width: '100%' }}
+                    tooltip="Customer Feedback"
+                />
+                :
+                <></>
+            }
 
             <div id={'buttondiv' + info.id} className="flex flex-wrap justify-content-end button" >
 
-                {user.role === 'Staff' && dstatus === 'Placed' ? <CustomButton id={'buttondecling' + info.id} label={'Decline'}
-                    icon="pi pi-check" onClick={() => updateStatus({ st: 'Declined' })} severity='warning' size='small' /> : <></>}
+                {user.role === 'Staff' && dstatus === 'Placed' ?
+                    <CustomButton id={'buttondecling' + info.id} label={'Decline'}
+                        onClick={() => updateStatus({ st: 'Declined' })} severity='danger' size='small'
+                        tooltip={CONSTANTS.TOOLTIPS.DECLINE}
+                    />
+                    :
+                    <></>
+                }
 
-                {user.role === 'Staff' && dstatus !== 'Delivered' && dstatus !== 'Declined' ? <CustomButton id={'buttonedit' + info.id} label={readOnly ? "Edit Status" : 'Cancel'}
-                    icon="pi pi-check" onClick={handleEdit} className='marginLeft5p' severity='danger' size='small' /> : <></>}
+                {user.role === 'Staff' && dstatus !== 'Delivered' && dstatus !== 'Declined' ?
+                    <CustomButton id={'buttonedit' + info.id} label={readOnly ? "Edit Status" : 'Cancel'}
+                        i onClick={handleEdit} className='marginLeft5p' severity={readOnly ? "Primary" : 'warning'} size='small'
+                        tooltip={readOnly ? CONSTANTS.TOOLTIPS.EDIT : CONSTANTS.TOOLTIPS.CANCEL}
+                    />
+                    :
+                    <></>
+                }
 
-                {!readOnly ? <CustomButton id={'savebutton' + info.id} label="Update" icon="pi pi-check" onClick={updateStatus}
-                    className='marginLeft5p' size='small' /> : <></>}
+                {!readOnly ?
+                    <CustomButton id={'savebutton' + info.id} label="Update" onClick={updateStatus}
+                        className='marginLeft5p' size='small'
+                        tooltip={CONSTANTS.TOOLTIPS.UPDATE}
+                    />
+                    :
+                    <></>
+                }
 
                 {user.role === 'Customer' && dstatus === 'Delivered' && !dfeedback ?
-                    <CustomButton id={'savebutton' + info.id} label="Update" icon="pi pi-check" onClick={updateStatus}
-                        className='marginLeft5p' size='small' /> : <></>}
+                    <CustomButton id={'savebutton' + info.id} label="Update" onClick={updateStatus}
+                        className='marginLeft5p' size='small' tooltip={CONSTANTS.TOOLTIPS.UPDATE}
+                    />
+                    :
+                    <></>
+                }
             </div >
         </>
     );
@@ -93,8 +125,12 @@ export default function OrderCard({ data, note, dstatus, dfeedback, date, userna
 
                 <hr />
 
-                {note ? <div className='button'>Note: {note}</div> : <></>}
-                {dfeedback ? <div className='button'>Feedback: {dfeedback}</div> : <></>}
+
+                <Tooltip target={'#note' + id} position='top'>Order Note: {note}</Tooltip>
+                {note ? <div id={'note' + id} className='button'>Note: {note}</div> : <></>}
+
+                <Tooltip target={'#feedback' + id} position='top'>Customer Feedback: {dfeedback}</Tooltip>
+                {dfeedback ? <div id={'feedback' + id} className='button2'>Feedback: {dfeedback}</div> : <></>}
             </Card>
         </div >
     )

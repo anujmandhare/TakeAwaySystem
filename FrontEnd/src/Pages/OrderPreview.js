@@ -45,7 +45,9 @@ export default function OrderPreview({ name, price, ingredients, className = '',
     }
 
     const deleteButton = (info) => <div className='flex flex-row-reverse'>
-        <CustomButton severity="danger" id={info.name} label='Remove' onClick={() => handleRemoveItem(info)} />
+        <CustomButton severity="danger" id={info.name} label='Remove' onClick={() => handleRemoveItem(info)}
+            tooltip={CONSTANTS.TOOLTIPS.REMOVE} tooltipOptions={{ position: 'left' }}
+        />
     </div>
 
     const customerPreviewColumns = [{ field: 'name', header: 'Name' },
