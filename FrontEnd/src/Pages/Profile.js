@@ -47,7 +47,7 @@ export default function Profile() {
 
 
     return (
-        <div id='profile' className="card">
+        <div id='profile' className="card marginTop10">
 
             <CustomInputField id='name' label='Name' value={name} setter={setName}
                 tooltip={CONSTANTS.TOOLTIPS.NAME}

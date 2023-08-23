@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { TabView, TabPanel } from 'primereact/tabview';
 
+import CONSTANTS from '../Setup/Constants.json';
 import Profile from '../Pages/Profile';
 import Orders from '../Pages/Orders';
 import OrderPreview from '../Pages/OrderPreview';

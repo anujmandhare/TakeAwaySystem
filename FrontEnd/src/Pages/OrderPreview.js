@@ -57,9 +57,17 @@ export default function OrderPreview({ name, price, ingredients, className = '',
     return (
         <div className="col-11">
             <div className='flex'>
-                <CustomInputField id='note' label='Add Note' value={note} setter={setNote} style={{ width: '1000px' }} />
-                <CustomButton id='placeOrder' label='Place Order' onClick={handlePlaceOrder} className='marginLeft5p' />
-                <CustomButton id='clearCard' label='Clear Cart' onClick={handleClearCart} severity="danger" className='marginLeft5p' />
+                <CustomInputField id='note' label='Add Note' value={note} setter={setNote} style={{ width: '1000px' }}
+                    tooltip={CONSTANTS.TOOLTIPS.NOTE} tooltipOptions={{ position: 'top' }} />
+
+                <CustomButton id='placeOrder' label='Place Order' onClick={handlePlaceOrder} className='marginLeft5p'
+                    tooltip={CONSTANTS.TOOLTIPS.PLACE_ORDER} tooltipOptions={{ position: 'left' }}
+                />
+
+                <CustomButton id='clearCard' label='Clear Cart' onClick={handleClearCart} severity="danger"
+                    className='marginLeft5p'
+                    tooltip={CONSTANTS.TOOLTIPS.CLEAR} tooltipOptions={{ position: 'left' }}
+                />
             </div>
 
             <CustomTable data={data} columnHeaders={customerPreviewColumns} className={'button'} />
