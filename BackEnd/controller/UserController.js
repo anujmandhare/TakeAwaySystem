@@ -4,13 +4,16 @@ const { hashedPassword, hashCompare } = require('../otherFiles/passwordHashing')
 const { createToken } = require('../otherFiles/authenticateToken');
 const { sendVerificationMail } = require('../otherFiles/emailVerification');
 
-
 const login = async (req, res, next) => {
     try {
 
         const { username, password } = new User(req.body);
 
         const data = await User.findOne({ username });
+
+        if (!data) {
+            throw Error(CONSTANTS.BAD_REQUEST, { cause: 'Incorrect username!' });
+        }
 
         if (data && !data.verified) {
             throw Error(CONSTANTS.BAD_REQUEST, { cause: 'Please verify your email first!' });

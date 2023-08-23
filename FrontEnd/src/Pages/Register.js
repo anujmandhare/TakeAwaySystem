@@ -52,14 +52,27 @@ export default function Register() {
         <>
             <div className="flex align-items-center justify-content-center marginTop10p">
                 <div className="">
-                    <CustomInputField id='name' label='Name' value={name} setter={setName}/>
-                    <CustomInputField id='username' label='Username' value={username} setter={setUsername} className={'input'}/>
-                    <CustomInputField id='password' type="password" label='Password' value={password} setter={setPassword} className={'input'}/>
-                    <CustomInputField id='number' label='Mobile Number' value={number} setter={setNumber} className={'input'}/>
-                    <CustomRadioButton labels={['Customer', 'Staff', 'Admin']} value={role} setter={setRole} />
+                    <CustomInputField id='name' label='Name' value={name} setter={setName}
+                        tooltip={CONSTANTS.TOOLTIPS.NAME}
+                    />
 
-                    <CustomButton label='Register' onClick={handleSubmit} />
-                    <LinkButton label='login' link='login'  className={'input'}/>
+                    <CustomInputField id='username' label='Username' value={username} setter={setUsername} className={'input'}
+                        tooltip={'Enter ' + CONSTANTS.TOOLTIPS.EMAIL}
+                    />
+                    <CustomInputField id='password' type="password" label='Password' value={password} setter={setPassword}
+                        className={'input'} tooltip={CONSTANTS.TOOLTIPS.PASSWORD}
+                    />
+
+                    <CustomInputField id='number' label='Mobile Number' value={number} setter={setNumber} className={'input'}
+                        tooltip={CONSTANTS.TOOLTIPS.NUMBER}
+                    />
+
+                    <CustomRadioButton labels={['Customer', 'Staff', 'Admin']} value={role} setter={setRole}
+                        tooltip={'Select ' + CONSTANTS.TOOLTIPS.ROLE}
+                    />
+
+                    <CustomButton label='Register' onClick={handleSubmit} tooltip={CONSTANTS.TOOLTIPS.REGISTER} />
+                    <LinkButton label='login' link='login' className={'input'} />
                 </div>
             </div>
         </>

@@ -45,11 +45,15 @@ export default function Login() {
         <>
             <div className="flex align-items-center justify-content-center marginTop10p">
                 <div>
-                    <CustomInputField id='username' label='Username' value={username} setter={setUsername} className={'input'}/>
-                    <CustomInputField id='password' type="password" label='Password' value={password} setter={setPassword} className={'input'}/>
+                    <CustomInputField id='username' label='Username' value={username} setter={setUsername} className={'input'}
+                        tooltip={CONSTANTS.TOOLTIPS.EMAIL}
+                    />
+                    <CustomInputField id='password' type="password" label='Password' value={password} setter={setPassword}
+                        className={'input'} tooltip={CONSTANTS.TOOLTIPS.PASSWORD}
+                    />
 
-                    <CustomButton label='Login' onClick={handleSubmit} />
-                    <LinkButton label="Register" link='register' className={'input'}/>
+                    <CustomButton label='Login' onClick={handleSubmit} tooltip={CONSTANTS.TOOLTIPS.LOGIN} />
+                    <LinkButton label="Register" link='register' className={'input'} />
                 </div>
             </div>
         </>

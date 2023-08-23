@@ -48,12 +48,25 @@ export default function Profile() {
 
     return (
         <div id='profile' className="card">
-            <CustomInputField id='name' label='Name' value={name} setter={setName} className={'input'}/>
-            <CustomInputField id='username' label='Username' disabled={true} value={username} setter={setUsername} className={'input'}/>
-            <CustomInputField id='number' label='Mobile Number' value={number} setter={setNumber} className={'input'}/>
-            <CustomInputField id='role' label='Role' disabled={true} value={role} setter={setRole} className={'input'}/>
 
-            <CustomButton label='Update' onClick={handleUpdate} />
+            <CustomInputField id='name' label='Name' value={name} setter={setName}
+                tooltip={CONSTANTS.TOOLTIPS.NAME}
+            />
+
+            <CustomInputField id='username' label='Username' disabled={true} value={username} setter={setUsername}
+                className={'input'}
+                tooltip={'Disabled field ' + CONSTANTS.TOOLTIPS.EMAIL}
+            />
+
+            <CustomInputField id='number' label='Mobile Number' value={number} setter={setNumber} className={'input'}
+                tooltip={CONSTANTS.TOOLTIPS.NUMBER}
+            />
+
+            <CustomInputField id='role' label='Role' disabled={true} value={role} setter={setRole} className={'input'}
+                tooltip={'Disabled field ' + CONSTANTS.TOOLTIPS.ROLE}
+            />
+
+            <CustomButton label='Update' onClick={handleUpdate} tooltip={CONSTANTS.TOOLTIPS.UPDATE} />
         </div>
     )
 }
