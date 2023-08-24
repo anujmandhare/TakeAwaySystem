@@ -8,6 +8,7 @@ import { POST } from '../Setup/Api';
 import CustomTable from '../Components/CustomTable';
 import CustomButton from '../Components/CustomButton';
 import CustomInputField from '../Components/CustomInputField';
+import CustomCalendar from '../Components/CustomCalendar';
 
 export default function OrderPreview({ name, price, ingredients, className = '', ...rest }) {
     const username = useSelector(_ => _.user.username);
@@ -16,17 +17,21 @@ export default function OrderPreview({ name, price, ingredients, className = '',
 
     const [data, setData] = useState(order);
     const [note, setNote] = useState('');
+    const [dateTime, setDateTime] = useState('');
 
     const handlePlaceOrder = async () => {
         if (!data.length) {
             alert('Please add items to place an order');
             return;
         }
-        const response = await POST(CONSTANTS.PLACE_ORDER, { note, data, date: new Date(), status: 'Placed', username });
+        const newDate = dateTime ? new Date(dateTime) : new Date();
+
+        const response = await POST(CONSTANTS.PLACE_ORDER, { note, data, date: newDate, status: 'Placed', username });
         dispatch(setLoadingTrue());
         if (response) {
             dispatch(clearCart());
             setNote('');
+            setDateTime('');
             alert(response);
         }
         dispatch(setLoadingFalse());
@@ -69,6 +74,12 @@ export default function OrderPreview({ name, price, ingredients, className = '',
                 <CustomButton id='clearCard' label='Clear Cart' onClick={handleClearCart} severity="danger"
                     className='marginLeft5p'
                     tooltip={CONSTANTS.TOOLTIPS.CLEAR} tooltipOptions={{ position: 'left' }}
+                />
+            </div>
+
+            <div className='flex'>
+                <CustomCalendar showTime={true} hourFormat={'24'} value={dateTime} setter={setDateTime}
+                    id='dateTime' label='Future Order Date & Time'
                 />
             </div>
 

@@ -130,7 +130,7 @@ export default function OrderCard({ data, note, dstatus, dfeedback, date, userna
                 {note ? <div id={'note' + id} className='button'>Note: {note}</div> : <></>}
 
                 <Tooltip target={'#feedback' + id} position='top'>Customer Feedback: {dfeedback}</Tooltip>
-                {dfeedback ? <div id={'feedback' + id} className='button2'>Feedback: {dfeedback}</div> : <></>}
+                {dfeedback ? <div id={'feedback' + id} className='button'>Feedback: {dfeedback}</div> : <></>}
             </Card>
         </div >
     )

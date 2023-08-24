@@ -7,6 +7,15 @@ export const CustomerUser = {
     "number": 2786364845
 };
 
+
+// .card:hover {
+//     border: 2px solid black;
+//     border-radius: 3px;
+//     transition: border;
+//     transition-delay: 2s;
+//   }
+
+
 export const StaffUser = {
     "name": "Anuj",
     "username": "anujmandhare.uk@gmail.com",

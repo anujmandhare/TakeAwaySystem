@@ -1,5 +1,6 @@
 const Order = require('../models/OrderModel');
 const CONSTANTS = require('../setup/constants.json');
+const schedule = require('node-schedule');
 
 
 const getAllOrders = async (req, res, next) => {
@@ -29,11 +30,27 @@ const placeOrder = async (req, res, next) => {
     try {
 
         const payload = new Order(req.body);
+        const date = new Date(payload.date);
+        let doc;
+        let futureOrder = false;
 
-        const doc = await payload.save();
+        async function placeOrder() {
+            return await payload.save();
+        }
+
+        if (date > new Date()) {
+            schedule.scheduleJob(date, async () => {
+                doc = await placeOrder();
+            });
+            futureOrder = true;
+        } else {
+            doc = await placeOrder();
+        }
 
         if (doc) {
             return res.status(CONSTANTS.STATUS_CODE.OK).send(`Order Placed successfully.`);
+        } else if (futureOrder) {
+            return res.status(CONSTANTS.STATUS_CODE.OK).send(`Future Order Placed successfully.`);
         } else {
             throw Error(CONSTANTS.BAD_REQUEST, { cause: 'Error in placing order.' });
         }
