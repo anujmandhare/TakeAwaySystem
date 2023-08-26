@@ -44,6 +44,7 @@ export default function OrderPreview({ name, price, ingredients, className = '',
     }
 
     const handleClearCart = () => {
+        setDateTime('');
         setNote('');
         setData([]);
         dispatch(clearCart());

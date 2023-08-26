@@ -39,7 +39,7 @@ const placeOrder = async (req, res, next) => {
         }
 
         if (date > new Date()) {
-            schedule.scheduleJob(date, async () => {
+            await schedule.scheduleJob(date, async () => {
                 doc = await placeOrder();
             });
             futureOrder = true;
@@ -50,7 +50,7 @@ const placeOrder = async (req, res, next) => {
         if (doc) {
             return res.status(CONSTANTS.STATUS_CODE.OK).send(`Order Placed successfully.`);
         } else if (futureOrder) {
-            return res.status(CONSTANTS.STATUS_CODE.OK).send(`Future Order Placed successfully.`);
+            return res.status(CONSTANTS.STATUS_CODE.OK).send(`Future Order scheduled for ${new Date('2023-08-26T11:59:06.109Z').toLocaleString()} successfully.`);
         } else {
             throw Error(CONSTANTS.BAD_REQUEST, { cause: 'Error in placing order.' });
         }
