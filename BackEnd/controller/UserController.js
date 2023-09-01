@@ -25,7 +25,7 @@ const login = async (req, res, next) => {
             const token = createToken({ username, role: data.role });
             return res.status(CONSTANTS.STATUS_CODE.OK).send({ token, username, role: data.role, name: data.name, number: data.number });
         } else {
-            throw Error(CONSTANTS.UNAUTHORISED, { cause: 'Incorrect email or Password!' });
+            throw Error(CONSTANTS.BAD_REQUEST, { cause: 'Incorrect email or Password!' });
         }
     } catch (error) {
         next(error);
@@ -48,7 +48,7 @@ const register = async (req, res, next) => {
             await sendVerificationMail(payload.username);
 
             await payload.save()
-            res.send(`User ${'name'} registered with id ${payload.username}!!! \nPlease verify your email by clicking on the link received in your email.`);
+            res.send(`User ${payload.name} registered with id ${payload.username}!!! \nPlease verify your email by clicking on the link received in your email.`);
 
         } else {
             throw Error(CONSTANTS.BAD_REQUEST, { cause: 'User already registered' });
