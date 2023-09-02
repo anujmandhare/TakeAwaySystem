@@ -120,7 +120,7 @@ export default function OrderCard({ data, note, dstatus, dfeedback, date, userna
                 <hr />
 
                 <CustomTable data={data} columnHeaders={customerColumns} className='col-12' />
-                <div className='flex flex-row-reverse' style={{ fontWeight: 'bold' }}>
+                <div className='flex flex-row-reverse' style={{ fontWeight: 'bolder' }}>
                     <div style={{ width: '15%' }}></div>Total: {totalPrice}£</div>
 
                 <hr />

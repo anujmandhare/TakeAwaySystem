@@ -36,6 +36,10 @@ code {
 .customTag {
   display:inline-flex !important;
   align-items: normal !important;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow:  2px 2px 4px #cbcfd0,
+            -2px -2px 4px #ffffff;
 }
 
 .p-tabview-title {
@@ -47,7 +51,28 @@ code {
 }
 
 .p-card .p-card-subtitle {
-  color: #495057 !important;
   font-weight: bold !important;
   margin-bottom: 0% !important;
+  color: white !important;
+}
+
+#NavBar {
+  margin-bottom: 10px;
+}
+
+#orderCard {
+  border-radius: 50px;
+  box-shadow:  2px 2px 4px #cbcfd0,
+            -2px -2px 4px #ffffff;
+}
+
+.menuCard {
+  border-radius: 10px !important;
+  box-shadow:  2px 2px 4px #cbcfd0,
+            -2px -2px 4px #ffffff !important;
+}
+
+.p-button {
+  box-shadow:  2px 2px 4px #cbcfd0,
+            -2px -2px 4px #ffffff !important;
 }

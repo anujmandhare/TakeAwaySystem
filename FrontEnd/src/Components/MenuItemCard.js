@@ -21,10 +21,6 @@ export default function MenuItemCard({ name, price, ingredients, className = '',
         dispatch(addToOrder({ name, price }));
     }
 
-    const header = (
-        <img alt="Card" src="https://primefaces.org/cdn/primereact/images/usercard.png" />
-    );
-
     const footer = (info) => (
         <div id={'buttondiv' + info.id} className="flex flex-wrap justify-content-end gap-2" >
             {user.role === 'Admin' ?
@@ -45,7 +41,7 @@ export default function MenuItemCard({ name, price, ingredients, className = '',
 
     return (
         <div id={id} className="col-4">
-            <Card id={id} title={name} subTitle={price + ' £'} className={className} footer={footer} {...rest}>
+            <Card id={id} title={name} subTitle={price + ' £'} className={className + ' menuCard '} footer={footer} {...rest}>
                 <p id={id} className="m-0">
                     {ingredients}
                 </p>

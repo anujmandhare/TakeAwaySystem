@@ -80,7 +80,7 @@ export default function OrderPreview({ name, price, ingredients, className = '',
 
             <div className='flex'>
                 <CustomCalendar showTime={true} hourFormat={'24'} value={dateTime} setter={setDateTime}
-                    id='dateTime' label='Future Order Date & Time'
+                    id='dateTime' label='Future Order Date & Time' style={{ minWidth: '300px' }}
                 />
             </div>
 

@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import MenuItemCard from '../Components/MenuItemCard';
 import CONSTANTS from '../Setup/Constants';
 import CustomButton from '../Components/CustomButton';
-import { menuItems } from '../dummyData';
 import MenuPopup from '../Components/MenuPopup';
 import { GET } from '../Setup/Api';
 import { removeMenuItem } from '../Redux/Data';
@@ -68,7 +67,7 @@ export default function Menu() {
                         {user.role === 'Customer' ? <div className='flex flex-row-reverse '>
                             <CustomTag children={'Cart Value: ' + cartValue + '£'} tooltip={CONSTANTS.TOOLTIPS.CART + ' ' + cartValue + '£'}></CustomTag>
                         </div> : <></>}
-                        <div className="grid" style={{ overflowX: 'auto' }}>
+                        <div className="grid" style={{ overflowX: 'auto', padding: '20px' }}>
                             {menuItemList.map((_, i) => <MenuItemCard key={'menuCard' + i} id={_.name + i} _id={_._id}
                                 name={_.name} price={_.price} ingredients={_.ingredients} showpop={setShowVisible} />)}
                         </div>
