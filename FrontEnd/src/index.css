@@ -36,6 +36,7 @@ code {
 .customTag {
   display:inline-flex !important;
   align-items: normal !important;
+  color: #ffffff !important;
   margin-bottom: 10px;
   border-radius: 10px;
   box-shadow:  2px 2px 4px #cbcfd0,
@@ -75,4 +76,5 @@ code {
 .p-button {
   box-shadow:  2px 2px 4px #cbcfd0,
             -2px -2px 4px #ffffff !important;
+  color: #ffffff !important;
 }

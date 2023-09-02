@@ -50,7 +50,8 @@ const placeOrder = async (req, res, next) => {
         if (doc) {
             return res.status(CONSTANTS.STATUS_CODE.OK).send(`Order Placed successfully.`);
         } else if (futureOrder) {
-            return res.status(CONSTANTS.STATUS_CODE.OK).send(`Future Order scheduled for ${new Date(payload.date).toLocaleString()} successfully. Once time it will show in your orders.`);
+            return res.status(CONSTANTS.STATUS_CODE.OK).send(`Future Order scheduled for ${new Date(payload.date).toLocaleString()} 
+            successfully. Once time it will show in your orders.`);
         } else {
             throw Error(CONSTANTS.BAD_REQUEST, { cause: 'Error in placing order.' });
         }
