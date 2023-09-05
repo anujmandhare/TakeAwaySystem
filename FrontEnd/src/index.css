@@ -78,3 +78,13 @@ code {
             -2px -2px 4px #ffffff !important;
   color: #ffffff !important;
 }
+
+.p-tooltip-text {
+  color: black !important;
+  background-color: #ffffff !important;
+}
+
+.required {
+  color: red;
+  font-weight: bolder;
+}

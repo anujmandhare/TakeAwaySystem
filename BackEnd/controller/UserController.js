@@ -42,9 +42,6 @@ const register = async (req, res, next) => {
         if (!idAvailable) {
             payload.password = await hashedPassword(payload.password);
 
-            //Uncomment below line for skipping email verification
-            // payload.verified = true;
-
             await sendVerificationMail(payload.username);
 
             await payload.save()

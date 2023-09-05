@@ -57,15 +57,15 @@ export default function MenuPopup({ close, visible, getAllMenuItems, ...rest }) 
             <Dialog header="Enter Menu Item Details" visible={visible} style={{ width: '50vw' }} onHide={() => close(false)} footer={footerContent}>
 
                 <CustomInputField id='name' label='Item Name' value={name} setter={setName} className={'input'}
-                    tooltip={CONSTANTS.TOOLTIPS.DISCARD}
+                    tooltip={CONSTANTS.TOOLTIPS.DISCARD} required
                 />
 
                 <CustomInputField id='price' type='number' label='Item Price' value={price} setter={setPrice} className={'input'}
-                    tooltip={CONSTANTS.TOOLTIPS.COST}
+                    tooltip={CONSTANTS.TOOLTIPS.COST} required
                 />
 
                 <CustomTextArea id='ingredients' label='Ingredients' rows='5' cols='30' value={ingredients} setter={setIngredients}
-                    tooltip={CONSTANTS.TOOLTIPS.INGREDIENTS}
+                    tooltip={CONSTANTS.TOOLTIPS.INGREDIENTS} required
                 />
 
             </Dialog>

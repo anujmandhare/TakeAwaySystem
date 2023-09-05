@@ -53,14 +53,14 @@ export default function Register() {
             <div className="flex align-items-center justify-content-center marginTop10p">
                 <div className="">
                     <CustomInputField id='name' label='Name' value={name} setter={setName}
-                        tooltip={CONSTANTS.TOOLTIPS.NAME}
+                        tooltip={CONSTANTS.TOOLTIPS.NAME} required
                     />
 
                     <CustomInputField id='username' label='Username' value={username} setter={setUsername} className={'input'}
-                        tooltip={'Enter ' + CONSTANTS.TOOLTIPS.EMAIL}
+                        tooltip={'Enter ' + CONSTANTS.TOOLTIPS.EMAIL} required
                     />
                     <CustomInputField id='password' type="password" label='Password' value={password} setter={setPassword}
-                        className={'input'} tooltip={CONSTANTS.TOOLTIPS.PASSWORD}
+                        className={'input'} tooltip={CONSTANTS.TOOLTIPS.PASSWORD} required
                     />
 
                     <CustomInputField id='number' label='Mobile Number' value={number} setter={setNumber} className={'input'}
@@ -68,7 +68,7 @@ export default function Register() {
                     />
 
                     <CustomRadioButton labels={['Customer', 'Staff', 'Admin']} value={role} setter={setRole}
-                        tooltip={'Select ' + CONSTANTS.TOOLTIPS.ROLE}
+                        tooltip={'Select ' + CONSTANTS.TOOLTIPS.ROLE} required
                     />
 
                     <CustomButton label='Register' onClick={handleSubmit} tooltip={CONSTANTS.TOOLTIPS.REGISTER} />

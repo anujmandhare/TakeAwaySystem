@@ -11,7 +11,7 @@ const { authenticateJWT } = require('./otherFiles/authenticateToken');
 
 var app = express();
 
-database.on('error', console.error.bind(console, 'Database connection error'))
+database.on('error', console.error.bind(console, 'Database connection error'));
 
 app.use(express.json());
 app.use(cors());
