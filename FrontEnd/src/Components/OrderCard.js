@@ -9,6 +9,7 @@ import CustomTable from './CustomTable';
 import CONSTANTS from '../Setup/Constants.json';
 import { POST } from '../Setup/Api';
 import { Tooltip } from 'primereact/tooltip';
+import CustomPopup from '../Components/CustomPopup';
 
 export default function OrderCard({ data, note, dstatus, dfeedback, date, username, className = '', showpop, id,
     getAllOrders, ...rest }) {
@@ -33,6 +34,11 @@ export default function OrderCard({ data, note, dstatus, dfeedback, date, userna
 
     const handleEdit = () => {
         setReadOnly(!readOnly);
+    }
+
+    const [popup, setPopup] = useState(false);
+    const openPopup = async () => {
+        setPopup(true);
     }
 
 
@@ -78,7 +84,7 @@ export default function OrderCard({ data, note, dstatus, dfeedback, date, userna
                     <></>
                 }
 
-                {user.role === 'Staff' && dstatus !== 'Delivered' && dstatus !== 'Declined' ?
+                {user.role === 'Staff' && dstatus !== 'Delivered' && dstatus !== 'Declined' && dstatus !== 'Cancelled' ?
                     <CustomButton id={'buttonedit' + info.id} label={readOnly ? "Edit Status" : 'Cancel'}
                         i onClick={handleEdit} className='marginLeft5p' severity={readOnly ? "Primary" : 'warning'} size='small'
                         tooltip={readOnly ? CONSTANTS.TOOLTIPS.EDIT : CONSTANTS.TOOLTIPS.CANCEL}
@@ -99,6 +105,15 @@ export default function OrderCard({ data, note, dstatus, dfeedback, date, userna
                 {user.role === 'Customer' && dstatus === 'Delivered' && !dfeedback ?
                     <CustomButton id={'savebutton' + info.id} label="Update" onClick={updateStatus}
                         className='marginLeft5p' size='small' tooltip={CONSTANTS.TOOLTIPS.UPDATE}
+                    />
+                    :
+                    <></>
+                }
+
+                {user.role === 'Customer' && dstatus === 'Placed' ?
+                    <CustomButton id={'buttoncancel' + info.id} label={'Cancel Order'}
+                        onClick={openPopup} severity='warning' size='small'
+                        tooltip={CONSTANTS.TOOLTIPS.CANCEL}
                     />
                     :
                     <></>
@@ -133,6 +148,10 @@ export default function OrderCard({ data, note, dstatus, dfeedback, date, userna
                 <Tooltip target={'#feedback' + id} position='top'>Customer Feedback: {dfeedback}</Tooltip>
                 {dfeedback ? <div id={'feedback' + id} className='button'>Feedback: {dfeedback}</div> : <></>}
             </Card>
+
+            <CustomPopup header='Confirmation' message="Are you sure you want to cancel the Order?"
+                singleButton={false} callback={() => updateStatus({ st: 'Cancelled' })} visible={popup} toggle={setPopup}
+            />
         </div >
     )
 }

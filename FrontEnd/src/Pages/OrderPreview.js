@@ -9,6 +9,7 @@ import CustomTable from '../Components/CustomTable';
 import CustomButton from '../Components/CustomButton';
 import CustomInputField from '../Components/CustomInputField';
 import CustomCalendar from '../Components/CustomCalendar';
+import CustomPopup from '../Components/CustomPopup';
 
 export default function OrderPreview({ name, price, ingredients, className = '', ...rest }) {
     const username = useSelector(_ => _.user.username);
@@ -19,11 +20,17 @@ export default function OrderPreview({ name, price, ingredients, className = '',
     const [note, setNote] = useState('');
     const [dateTime, setDateTime] = useState('');
 
-    const handlePlaceOrder = async () => {
+    const [popup, setPopup] = useState(false);
+    const openPopup = async () => {
         if (!data.length) {
             alert('Please add items to place an order');
             return;
         }
+
+        setPopup(true);
+    }
+
+    const handlePlaceOrder = async () => {
         const newDate = dateTime ? new Date(dateTime) : new Date();
 
         const response = await POST(CONSTANTS.PLACE_ORDER, { note, data, date: newDate, status: 'Placed', username });
@@ -69,7 +76,7 @@ export default function OrderPreview({ name, price, ingredients, className = '',
                 <CustomInputField id='note' label='Add Note' value={note} setter={setNote} style={{ width: '1000px' }}
                     tooltip={CONSTANTS.TOOLTIPS.NOTE} tooltipOptions={{ position: 'top' }} />
 
-                <CustomButton id='placeOrder' label='Place Order' onClick={handlePlaceOrder} className='marginLeft5p'
+                <CustomButton id='placeOrder' label='Place Order' onClick={openPopup} className='marginLeft5p'
                     tooltip={CONSTANTS.TOOLTIPS.PLACE_ORDER} tooltipOptions={{ position: 'left' }}
                 />
 
@@ -86,6 +93,9 @@ export default function OrderPreview({ name, price, ingredients, className = '',
             </div>
 
             <CustomTable data={data} columnHeaders={customerPreviewColumns} className={'button'} />
+            <CustomPopup header='Confirmation' message="Do you want to proceed and place the order?"
+                singleButton={false} callback={handlePlaceOrder} visible={popup} toggle={setPopup}
+            />
         </div >
     )
 }

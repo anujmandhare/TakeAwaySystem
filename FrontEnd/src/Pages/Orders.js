@@ -16,7 +16,7 @@ export default function Orders() {
         const data = await GET(CONSTANTS.GET_ALL_ORDERS + '?username=' + username);
 
         if (data) {
-            const ndata = data.filter(ele => ele.status !== 'Delivered');
+            const ndata = data.filter(ele => ele.status !== 'Delivered' && ele.status !== 'Cancelled');
             setOrders(ndata);
             setErrorMsg('');
         } else {
