@@ -10,9 +10,11 @@ export const order = createSlice({
         addToOrder: (state, action) => {
             const index = state.findIndex(_ => _.name === action.payload.name);
             if (index === -1) {
+                action.payload.quantity = 1;
                 state.push(action.payload);
             } else {
                 state[index].price = Number(state[index].price) + Number(action.payload.price);
+                state[index].quantity = Number(state[index].quantity) + 1;
             }
             localStorage.setItem('order', JSON.stringify(state));
         },

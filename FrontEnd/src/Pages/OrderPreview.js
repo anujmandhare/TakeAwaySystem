@@ -57,6 +57,7 @@ export default function OrderPreview({ name, price, ingredients, className = '',
     </div>
 
     const customerPreviewColumns = [{ field: 'name', header: 'Name' },
+    { field: 'quantity', header: 'Quantity' },
     { field: 'price', header: 'Price' },
     { field: '', header: '', body: deleteButton }];
 

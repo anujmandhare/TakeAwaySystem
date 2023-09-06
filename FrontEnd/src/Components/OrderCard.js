@@ -24,6 +24,7 @@ export default function OrderCard({ data, note, dstatus, dfeedback, date, userna
     const totalPrice = data.reduce((acc, ele) => ele.price + acc, 0);
 
     const customerColumns = [{ field: 'name', header: 'Name' },
+    { field: 'quantity', header: 'Quantity' },
     { field: 'price', header: 'Price' }];
 
     const statusArray = [{ name: 'Preparing', code: 'Preparing' },
