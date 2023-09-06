@@ -65,18 +65,21 @@ code {
   border-radius: 50px;
   box-shadow:  2px 2px 4px #cbcfd0,
             -2px -2px 4px #ffffff;
+  background-color: #0e1315 !important;
 }
 
 .menuCard {
   border-radius: 10px !important;
   box-shadow:  2px 2px 4px #cbcfd0,
             -2px -2px 4px #ffffff !important;
+  background-color: #0e1315 !important;
 }
 
 .p-button {
   box-shadow:  2px 2px 4px #cbcfd0,
             -2px -2px 4px #ffffff !important;
   color: #ffffff !important;
+  background: rgb(99 99 241) !important;
 }
 
 .p-tooltip-text {
@@ -87,4 +90,16 @@ code {
 .required {
   color: red;
   font-weight: bolder;
+}
+
+.p-button-danger {
+  background: #e50b48 !important;
+}
+
+.p-button-warning {
+  background: #f4b403 !important;
+}
+
+.p-button-primary {
+  background: rgb(99 99 241) !important;
 }

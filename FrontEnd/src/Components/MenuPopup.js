@@ -41,8 +41,8 @@ export default function MenuPopup({ close, visible, getAllMenuItems, ...rest }) 
 
     const footerContent = (
         <div>
-            <Button label="Discard" icon="pi pi-times" onClick={() => close(false)} className="p-button-text"
-                tooltip={CONSTANTS.TOOLTIPS.DISCARD}
+            <Button label="Discard" icon="pi pi-times" onClick={() => close(false)}
+                tooltip={CONSTANTS.TOOLTIPS.DISCARD} severity="warning"
             />
 
             <Button label="Save" onClick={() => addUpdateMenuItem(false)} autoFocus
