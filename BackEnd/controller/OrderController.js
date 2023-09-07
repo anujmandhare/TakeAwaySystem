@@ -83,5 +83,5 @@ const updateStatus = async (req, res, next) => {
 };
 
 module.exports = {
-    placeOrder, getAllOrders, updateStatus, onlineOrder
+    placeOrder, getAllOrders, updateStatus
 }; 
