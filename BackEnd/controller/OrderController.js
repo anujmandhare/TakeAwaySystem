@@ -32,26 +32,27 @@ const placeOrder = async (req, res, next) => {
         const payload = new Order(req.body);
         const date = new Date(payload.date);
         let doc;
+        let newDoc;
         let futureOrder = false;
 
-        async function placeOrder() {
-            return await payload.save();
-        }
+        doc = await payload.save();
+
+        const id = doc.id;
 
         if (date > new Date()) {
             await schedule.scheduleJob(date, async () => {
-                doc = await placeOrder();
+                const dd = await Order.findById(id);
+                if (dd.status !== 'Cancelled') {
+                    newDoc = await Order.findByIdAndUpdate(id, { status: 'Placed' }, { new: true });
+                }
             });
             futureOrder = true;
-        } else {
-            doc = await placeOrder();
         }
 
-        if (doc) {
+        if (doc && !futureOrder) {
             return res.status(CONSTANTS.STATUS_CODE.OK).send(`Order Placed successfully.`);
         } else if (futureOrder) {
-            return res.status(CONSTANTS.STATUS_CODE.OK).send(`Future Order scheduled for ${new Date(payload.date).toLocaleString()} 
-            successfully. Once time it will show in your orders.`);
+            return res.status(CONSTANTS.STATUS_CODE.OK).send(`Future Order scheduled for ${new Date(payload.date).toLocaleString()} successfully. Once time order status will change to placed.`);
         } else {
             throw Error(CONSTANTS.BAD_REQUEST, { cause: 'Error in placing order.' });
         }
@@ -82,5 +83,5 @@ const updateStatus = async (req, res, next) => {
 };
 
 module.exports = {
-    placeOrder, getAllOrders, updateStatus
+    placeOrder, getAllOrders, updateStatus, onlineOrder
 }; 

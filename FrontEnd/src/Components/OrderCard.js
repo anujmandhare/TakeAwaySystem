@@ -84,7 +84,7 @@ export default function OrderCard({ data, note, dstatus, dfeedback, date, userna
                     <></>
                 }
 
-                {user.role === 'Staff' && dstatus !== 'Delivered' && dstatus !== 'Declined' && dstatus !== 'Cancelled' ?
+                {user.role === 'Staff' && dstatus !== 'Delivered' && dstatus !== 'Declined' && dstatus !== 'Cancelled' && dstatus !== 'Scheduled' ?
                     <CustomButton id={'buttonedit' + info.id} label={readOnly ? "Edit Status" : 'Cancel'}
                         i onClick={handleEdit} className='marginLeft5p' severity={readOnly ? "Primary" : 'warning'} size='small'
                         tooltip={readOnly ? CONSTANTS.TOOLTIPS.EDIT : CONSTANTS.TOOLTIPS.CANCEL}
@@ -110,7 +110,7 @@ export default function OrderCard({ data, note, dstatus, dfeedback, date, userna
                     <></>
                 }
 
-                {user.role === 'Customer' && dstatus === 'Placed' ?
+                {user.role === 'Customer' && (dstatus === 'Placed' || dstatus === 'Scheduled') ?
                     <CustomButton id={'buttoncancel' + info.id} label={'Cancel Order'}
                         onClick={openPopup} severity='warning' size='small'
                         tooltip={CONSTANTS.TOOLTIPS.CANCEL}

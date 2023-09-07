@@ -33,7 +33,7 @@ export default function OrderPreview({ name, price, ingredients, className = '',
     const handlePlaceOrder = async () => {
         const newDate = dateTime ? new Date(dateTime) : new Date();
 
-        const response = await POST(CONSTANTS.PLACE_ORDER, { note, data, date: newDate, status: 'Placed', username });
+        const response = await POST(CONSTANTS.PLACE_ORDER, { note, data, date: newDate, status: dateTime ? 'Scheduled' : 'Placed', username });
         dispatch(setLoadingTrue());
         if (response) {
             dispatch(clearCart());
