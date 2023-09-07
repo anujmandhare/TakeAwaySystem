@@ -142,11 +142,11 @@ export default function OrderCard({ data, note, dstatus, dfeedback, date, userna
                 <hr />
 
 
-                <Tooltip target={'#note' + id} position='top'>Order Note: {note}</Tooltip>
-                {note ? <div id={'note' + id} className='button'>Note: {note}</div> : <></>}
+                <Tooltip target={'#displaynote' + id} position='top'>Order Note: {note}</Tooltip>
+                {note ? <div id={'displaynote' + id} className='button'>Note: {note}</div> : <></>}
 
-                <Tooltip target={'#feedback' + id} position='top'>Customer Feedback: {dfeedback}</Tooltip>
-                {dfeedback ? <div id={'feedback' + id} className='button'>Feedback: {dfeedback}</div> : <></>}
+                <Tooltip target={'#displayfeedback' + id} position='top'>Customer Feedback: {dfeedback}</Tooltip>
+                {dfeedback ? <div id={'displayfeedback' + id} className='button'>Feedback: {dfeedback}</div> : <></>}
             </Card>
 
             <CustomPopup header='Confirmation' message="Are you sure you want to cancel the Order?"
