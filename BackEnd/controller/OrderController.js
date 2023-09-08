@@ -1,4 +1,5 @@
 const Order = require('../models/OrderModel');
+const Menu = require('../models/MenuModel');
 const CONSTANTS = require('../setup/constants.json');
 const schedule = require('node-schedule');
 
@@ -20,6 +21,41 @@ const getAllOrders = async (req, res, next) => {
             return res.status(CONSTANTS.STATUS_CODE.OK).send(doc.sort((a, b) => a.date < b.data ? 0 : -1));
         } else {
             throw Error(CONSTANTS.BAD_REQUEST, { cause: 'Error in fetching orders.' });
+        }
+    } catch (error) {
+        next(error);
+    }
+};
+
+const onlineOrder = async (req, res, next) => {
+    try {
+        if (req.body.queryResult) {
+            const temp = req.body.queryResult.outputContexts[0].parameters.MenuItems.split(/[,&]/);
+            let menuItems = [];
+            temp.forEach(e => {
+                const acs = e.split(/and/);
+                menuItems = [...menuItems, ...acs]
+            })
+            const name = req.body.queryResult.outputContexts[0].parameters.person.name;
+
+            const data = await menuItems.reduce(async (acc, ele, i) => {
+                let ac;
+                if (ele !== 'and') {
+                    ac = await acc;
+                    const regex = new RegExp(ele, "i");
+                    const d = await Menu.findOne().where({ name: regex });
+                    if (d) {
+                        ac.push({ name: d.name, price: d.price, quantity: 1 });
+                    }
+                }
+                return ac;
+            }, Promise.resolve([]));
+
+
+
+            const order = new Order({ date: new Date(), username: name, feedback: '', status: 'Placed', note: '', data });
+            const doc = await order.save();
+            return res.status(CONSTANTS.STATUS_CODE.OK).send({ "message": "Order Placed" });
         }
     } catch (error) {
         next(error);
@@ -83,5 +119,5 @@ const updateStatus = async (req, res, next) => {
 };
 
 module.exports = {
-    placeOrder, getAllOrders, updateStatus
+    placeOrder, getAllOrders, updateStatus, onlineOrder
 }; 
