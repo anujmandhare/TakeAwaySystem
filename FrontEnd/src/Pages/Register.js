@@ -33,6 +33,11 @@ export default function Register() {
             return;
         }
 
+        if(!name){
+            alert('Please enter a valid name!');
+            return
+        }
+
         dispatch(setLoadingTrue());
         const data = await POST(CONSTANTS.REGISTER, { name, username, password, role, number });
 

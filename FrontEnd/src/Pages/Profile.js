@@ -34,6 +34,11 @@ export default function Profile() {
             return;
         }
 
+        if(!name){
+            alert('Please enter a valid name!');
+            return
+        }
+
         dispatch(setLoadingTrue());
         const data = await POST(CONSTANTS.UPDATE, { name, username, role, number });
 
