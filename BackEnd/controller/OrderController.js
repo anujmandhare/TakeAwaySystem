@@ -42,7 +42,7 @@ const onlineOrder = async (req, res, next) => {
                 let ac;
                 if (ele !== 'and') {
                     ac = await acc;
-                    const regex = new RegExp(ele, "i");
+                    const regex = new RegExp(ele.trim(), "i");
                     const d = await Menu.findOne().where({ name: regex });
                     if (d) {
                         ac.push({ name: d.name, price: d.price, quantity: 1 });
@@ -117,6 +117,8 @@ const updateStatus = async (req, res, next) => {
         next(error);
     }
 };
+
+
 
 module.exports = {
     placeOrder, getAllOrders, updateStatus, onlineOrder

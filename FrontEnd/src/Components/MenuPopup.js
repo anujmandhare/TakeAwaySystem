@@ -26,6 +26,21 @@ export default function MenuPopup({ close, visible, getAllMenuItems, ...rest }) 
 
 
     const addUpdateMenuItem = async () => {
+        if (!name) {
+            alert('Please enter a valid name!');
+            return
+        }
+
+        if (!price) {
+            alert('Please enter a price!');
+            return
+        }
+
+        if (!ingredients) {
+            alert('Please enter ingredients contained!');
+            return
+        }
+
         let data1;
         if (data?._id) {
             data1 = await POST(CONSTANTS.UPDATE_MENU_ITEM, { name, price, ingredients, _id: data._id });
@@ -39,8 +54,21 @@ export default function MenuPopup({ close, visible, getAllMenuItems, ...rest }) 
         }
     };
 
+    const deleteMenuItem = async () => {
+        let data1 = await POST(CONSTANTS.DELETE_MENU_ITEM, { id: data._id });
+        close(false);
+        if (data1) {
+            alert(data1);
+            getAllMenuItems();
+        }
+    }
+
     const footerContent = (
         <div>
+            <Button label="Delete" onClick={deleteMenuItem}
+                tooltip={CONSTANTS.TOOLTIPS.REMOVE} severity="danger"
+            />
+
             <Button label="Discard" icon="pi pi-times" onClick={() => close(false)}
                 tooltip={CONSTANTS.TOOLTIPS.DISCARD} severity="warning"
             />

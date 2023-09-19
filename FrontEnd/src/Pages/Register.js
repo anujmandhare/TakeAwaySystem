@@ -33,8 +33,13 @@ export default function Register() {
             return;
         }
 
-        if(!name){
+        if (!name) {
             alert('Please enter a valid name!');
+            return
+        }
+
+        if (!password) {
+            alert('Please enter a valid password!');
             return
         }
 

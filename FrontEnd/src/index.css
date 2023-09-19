@@ -37,6 +37,7 @@ code {
   display:inline-flex !important;
   align-items: normal !important;
   color: #ffffff !important;
+  background-color: rgb(99 99 241) !important;
   margin-bottom: 10px;
   border-radius: 10px;
   box-shadow:  2px 2px 4px #cbcfd0,

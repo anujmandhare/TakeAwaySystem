@@ -59,7 +59,21 @@ const updateMenuItem = async (req, res, next) => {
     }
 };
 
+const deleteMenuItem = async (req, res, next) => {
+    try {
+
+        const doc = await Menu.deleteOne({ _id: req.body.id });
+
+        if (doc.deletedCount) {
+            return res.status(CONSTANTS.STATUS_CODE.OK).send(`Menu item deleted successfully.`);
+        } else {
+            throw Error(CONSTANTS.BAD_REQUEST, { cause: 'Error in deleting item.' });
+        }
+    } catch (error) {
+        next(error);
+    }
+};
 
 module.exports = {
-    addMenuItem, updateMenuItem, getAllMenuItems
+    addMenuItem, updateMenuItem, getAllMenuItems, deleteMenuItem
 }; 

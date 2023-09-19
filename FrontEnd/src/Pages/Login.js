@@ -28,6 +28,11 @@ export default function Login() {
             return;
         }
 
+        if (!password) {
+            alert('Please enter a valid password!');
+            return
+        }
+
         dispatch(setLoadingTrue());
         const data = await POST(CONSTANTS.LOGIN, { username, password });
 
