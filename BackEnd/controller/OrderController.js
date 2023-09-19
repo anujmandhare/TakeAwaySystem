@@ -30,15 +30,10 @@ const getAllOrders = async (req, res, next) => {
 const onlineOrder = async (req, res, next) => {
     try {
         if (req.body.queryResult) {
-            const temp = req.body.queryResult.outputContexts[0].parameters.MenuItems.split(/[,&]/);
-            let menuItems = [];
-            temp.forEach(e => {
-                const acs = e.split(/and/);
-                menuItems = [...menuItems, ...acs]
-            })
+            const temp = req.body.queryResult.outputContexts[0].parameters.menuitems;
             const name = req.body.queryResult.outputContexts[0].parameters.person.name;
 
-            const data = await menuItems.reduce(async (acc, ele, i) => {
+            const data = await temp.reduce(async (acc, ele, i) => {
                 let ac;
                 if (ele !== 'and') {
                     ac = await acc;
