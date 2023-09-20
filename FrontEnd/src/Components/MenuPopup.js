@@ -65,9 +65,9 @@ export default function MenuPopup({ close, visible, getAllMenuItems, ...rest }) 
 
     const footerContent = (
         <div>
-            <Button label="Delete" onClick={deleteMenuItem}
+            {data.name ? <Button label="Delete" onClick={deleteMenuItem}
                 tooltip={CONSTANTS.TOOLTIPS.REMOVE} severity="danger"
-            />
+            /> : <></>}
 
             <Button label="Discard" icon="pi pi-times" onClick={() => close(false)}
                 tooltip={CONSTANTS.TOOLTIPS.DISCARD} severity="warning"
