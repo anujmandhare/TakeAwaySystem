@@ -74,7 +74,7 @@ export default function Register() {
                     />
 
                     <CustomInputField id='number' label='Mobile Number' value={number} setter={setNumber} className={'input'}
-                        tooltip={CONSTANTS.TOOLTIPS.NUMBER}
+                        tooltip={CONSTANTS.TOOLTIPS.NUMBER} required
                     />
 
                     <CustomRadioButton labels={['Customer', 'Staff', 'Admin']} value={role} setter={setRole}

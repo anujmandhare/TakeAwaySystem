@@ -34,7 +34,7 @@ export default function Profile() {
             return;
         }
 
-        if(!name){
+        if (!name) {
             alert('Please enter a valid name!');
             return
         }
@@ -64,7 +64,7 @@ export default function Profile() {
             />
 
             <CustomInputField id='number' label='Mobile Number' value={number} setter={setNumber} className={'input'}
-                tooltip={CONSTANTS.TOOLTIPS.NUMBER}
+                tooltip={CONSTANTS.TOOLTIPS.NUMBER} required
             />
 
             <CustomInputField id='role' label='Role' disabled={true} value={role} setter={setRole} className={'input'}
