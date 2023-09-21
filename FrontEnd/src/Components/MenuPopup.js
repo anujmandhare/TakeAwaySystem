@@ -9,6 +9,7 @@ import { POST } from '../Setup/Api';
 import CONSTANTS from '../Setup/Constants.json';
 import CustomInputField from './CustomInputField';
 import CustomTextArea from "./CustomTextArea";
+import CustomPopup from "./CustomPopup";
 
 export default function MenuPopup({ close, visible, getAllMenuItems, ...rest }) {
 
@@ -24,6 +25,13 @@ export default function MenuPopup({ close, visible, getAllMenuItems, ...rest }) 
         setIngredients(data?.ingredients ? data.ingredients : '');
     }, [data]);
 
+
+    const [popup, setPopup] = useState(false);
+    const [message, setMessage] = useState('');
+    const openPopup = async () => {
+        setMessage('Are you sure you want to delete this item.');
+        setPopup(true);
+    }
 
     const addUpdateMenuItem = async () => {
         if (!name) {
@@ -61,11 +69,13 @@ export default function MenuPopup({ close, visible, getAllMenuItems, ...rest }) 
             alert(data1);
             getAllMenuItems();
         }
+        setMessage('');
+        setPopup(false);
     }
 
     const footerContent = (
         <div>
-            {data.name ? <Button label="Delete" onClick={deleteMenuItem}
+            {data.name ? <Button label="Delete" onClick={openPopup}
                 tooltip={CONSTANTS.TOOLTIPS.REMOVE} severity="danger"
             /> : <></>}
 
@@ -97,6 +107,9 @@ export default function MenuPopup({ close, visible, getAllMenuItems, ...rest }) 
                 />
 
             </Dialog>
+            <CustomPopup header='Confirmation' message={message}
+                singleButton={false} callback={deleteMenuItem} visible={popup} toggle={setPopup}
+            />
         </div>
     )
 }
