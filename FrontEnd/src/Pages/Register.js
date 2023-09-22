@@ -63,18 +63,18 @@ export default function Register() {
             <div className="flex align-items-center justify-content-center marginTop10p">
                 <div className="">
                     <CustomInputField id='name' label='Name' value={name} setter={setName}
-                        tooltip={CONSTANTS.TOOLTIPS.NAME} required
+                        tooltip={CONSTANTS.TOOLTIPS.NAME} required style={{ width: '300px' }}
                     />
 
                     <CustomInputField id='username' label='Username' value={username} setter={setUsername} className={'input'}
-                        tooltip={'Enter ' + CONSTANTS.TOOLTIPS.EMAIL} required
+                        tooltip={'Enter ' + CONSTANTS.TOOLTIPS.EMAIL} required style={{ width: '300px' }}
                     />
                     <CustomInputField id='password' type="password" label='Password' value={password} setter={setPassword}
-                        className={'input'} tooltip={CONSTANTS.TOOLTIPS.PASSWORD} required
+                        className={'input'} tooltip={CONSTANTS.TOOLTIPS.PASSWORD} required style={{ width: '300px' }}
                     />
 
                     <CustomInputField id='number' label='Mobile Number' value={number} setter={setNumber} className={'input'}
-                        tooltip={CONSTANTS.TOOLTIPS.NUMBER} required
+                        tooltip={CONSTANTS.TOOLTIPS.NUMBER} required style={{ width: '300px' }}
                     />
 
                     <CustomRadioButton labels={['Customer', 'Staff', 'Admin']} value={role} setter={setRole}

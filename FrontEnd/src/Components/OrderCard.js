@@ -103,7 +103,7 @@ export default function OrderCard({ data, note, dstatus, dfeedback, date, userna
                 }
 
                 {user.role === 'Customer' && dstatus === 'Delivered' && !dfeedback ?
-                    <CustomButton id={'savebutton' + info.id} label="Update" onClick={updateStatus}
+                    <CustomButton id={'savebutton' + info.id} label="Submit" onClick={updateStatus}
                         className='marginLeft5p' size='small' tooltip={CONSTANTS.TOOLTIPS.UPDATE}
                     />
                     :

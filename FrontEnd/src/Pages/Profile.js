@@ -55,20 +55,20 @@ export default function Profile() {
         <div id='profile' className="card marginTop10">
 
             <CustomInputField id='name' label='Name' value={name} setter={setName}
-                tooltip={CONSTANTS.TOOLTIPS.NAME} required
+                tooltip={CONSTANTS.TOOLTIPS.NAME} required style={{ width: '300px' }}
             />
 
             <CustomInputField id='username' label='Username' disabled={true} value={username} setter={setUsername}
-                className={'input'} required
+                className={'input'} required style={{ width: '300px' }}
                 tooltip={'Disabled field ' + CONSTANTS.TOOLTIPS.EMAIL}
             />
 
             <CustomInputField id='number' label='Mobile Number' value={number} setter={setNumber} className={'input'}
-                tooltip={CONSTANTS.TOOLTIPS.NUMBER} required
+                tooltip={CONSTANTS.TOOLTIPS.NUMBER} required style={{ width: '300px' }}
             />
 
             <CustomInputField id='role' label='Role' disabled={true} value={role} setter={setRole} className={'input'}
-                tooltip={'Disabled field ' + CONSTANTS.TOOLTIPS.ROLE} required
+                tooltip={'Disabled field ' + CONSTANTS.TOOLTIPS.ROLE} required style={{ width: '300px' }}
             />
 
             <CustomButton label='Update' onClick={handleUpdate} tooltip={CONSTANTS.TOOLTIPS.UPDATE} />
