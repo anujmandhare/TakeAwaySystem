@@ -51,6 +51,8 @@ const onlineOrder = async (req, res, next) => {
             const order = new Order({ date: new Date(), username: name, feedback: '', status: 'Placed', note: '', data });
             const doc = await order.save();
             return res.status(CONSTANTS.STATUS_CODE.OK).send({ "message": "Order Placed" });
+        }else {
+            throw Error(CONSTANTS.BAD_REQUEST, { cause: 'Incorrect data.' });
         }
     } catch (error) {
         next(error);
