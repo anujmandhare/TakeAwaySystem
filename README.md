@@ -1,5 +1,8 @@
 # Takeaway Menu System
 
+Executed Web Application integrating telephone, chatbot ordering using Google Dialogflow, Telegram chatbot and Twilio telephone API, order scheduling feature using node-schedule npm package, leading to customer flexibility, order efficiency and ease of use.
+Optimised for addressing the needs related to the colour-blind disabled positively impacting broader demographics, positively impacting SEO ranking and increasing website visibility and organic traffic.
+
 # Requirements
 1. NodeJS
     For running the project the most important software required is Node.js, this can be downloaded
