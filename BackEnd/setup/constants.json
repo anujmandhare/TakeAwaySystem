@@ -1,7 +1,7 @@
 {
-    "PORT": 8000,
+    "PORT": 8080,
     "DATABASE": {
-        "URI": "mongodb+srv://asd:asd@cluster0.s7tgpof.mongodb.net/?retryWrites=true&w=majority"
+        "URI": "mongodb+srv://asd:asd@cluster0.s7tgpof.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
     },
     "MAIL": {
         "email": "takeawaymenusystem@outlook.com",
