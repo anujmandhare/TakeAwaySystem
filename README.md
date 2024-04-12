@@ -3,6 +3,25 @@
 Executed Web Application integrating telephone, chatbot ordering using Google Dialogflow, Telegram chatbot and Twilio telephone API, order scheduling feature using node-schedule npm package, leading to customer flexibility, order efficiency and ease of use.
 Optimised for addressing the needs related to the colour-blind disabled positively impacting broader demographics, positively impacting SEO ranking and increasing website visibility and organic traffic.
 
+# Technologies used
+Frontend
+1. React
+2. Redux/toolkit
+3. Prime React
+4. Axios
+5. HTML5
+6. CSS3
+7. Javascript
+
+Backend
+1. Bcrypt
+2. Cors
+3. Express
+4. Jsonwebtoken
+5. Mongoose
+6. Node-schedule
+7. Nodemailer
+   
 # Requirements
 1. NodeJS
     For running the project the most important software required is Node.js, this can be downloaded
