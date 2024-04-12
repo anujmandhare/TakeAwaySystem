@@ -1,4 +1,4 @@
-
+s
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
@@ -17,7 +17,7 @@ export default function NavBar() {
     }
 
 
-    const start = <div style={{ fontSize: 36, fontStyle: 'italic', fontWeight: 'bold', color: '#6366F1' }}>OnTheGo</div>;
+    const start = <div style={{ fontSize: 36, fontStyle: 'italic', fontWeight: 'bold', color: '#6366F1' }}>Easy Go</div>;
     const end = user.username ? <CustomButton onClick={handleLogout} label='logout' id='logout'
         tooltip={CONSTANTS.TOOLTIPS.LOGOUT} tooltipOptions={{ position: 'left' }}
     />
