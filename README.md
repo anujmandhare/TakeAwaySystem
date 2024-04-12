@@ -21,6 +21,9 @@ Backend
 5. Mongoose
 6. Node-schedule
 7. Nodemailer
+8. Twilio
+9. Dialogflow
+10. Chatbot
    
 # Requirements
 1. NodeJS
